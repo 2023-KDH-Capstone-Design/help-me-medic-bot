@@ -1,7 +1,7 @@
 import React from "react";
 
 import AppBar from "../components/ui/AppBar";
-import Post from "../components/ui/Forum/Post";
+import Post from "../components/forum/Post";
 
 const Forum = () => {
   return (
