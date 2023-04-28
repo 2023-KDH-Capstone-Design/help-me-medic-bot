@@ -1,25 +1,24 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
-
 import CustomDrawer from "./components/ui/CustomDrawer";
 import Home from "./pages/Home";
 import Chat from "./pages/Chat";
-import Community from "./pages/Community";
+import Forum from "./pages/Forum";
 
 const App = () => {
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
+    <div className="drawer drawer-mobile">
+      <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content flex flex-col">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/forum" element={<Forum />} />
+        </Routes>
+      </div>
       <CustomDrawer />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/community" element={<Community />} />
-      </Routes>
-    </Box>
+    </div>
   );
 };
 

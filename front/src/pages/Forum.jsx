@@ -2,13 +2,13 @@ import React from "react";
 
 import CustomAppBar from "../components/ui/CustomAppBar";
 
-const Home = () => {
+const Forum = () => {
   return (
     <>
-      <CustomAppBar title="Home" />
+      <CustomAppBar title="Forum" />
       <div></div>
     </>
   );
 };
 
-export default Home;
+export default Forum;

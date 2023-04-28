@@ -1,23 +1,19 @@
 import React from "react";
 
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-
-const drawerWidth = 260;
+import { FaBars } from "react-icons/fa";
 
 const CustomAppBar = (props) => {
   return (
-    <AppBar
-      position="fixed"
-      sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
-    >
-      <Toolbar>
-        <Typography variant="h6" noWrap component="div">
-          {props.title}
-        </Typography>
-      </Toolbar>
-    </AppBar>
+    <div className="navbar bg-base-100">
+      <div className="flex-1">
+        <a className="btn btn-ghost normal-case text-xl">{props.title}</a>
+      </div>
+      <div className="flex-none">
+        <label htmlFor="my-drawer-2" className="btn btn-square btn-ghost">
+          <FaBars />
+        </label>
+      </div>
+    </div>
   );
 };
 
