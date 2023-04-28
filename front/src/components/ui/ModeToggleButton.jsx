@@ -4,7 +4,7 @@ import { themeChange } from "theme-change";
 
 import { FaSun, FaMoon } from "react-icons/fa";
 
-const DarkModeToggleButton = () => {
+const ModeToggleButton = () => {
   const THEME_LIGHT = useMemo(() => "lofi", []);
   const THEME_DARK = useMemo(() => "business", []);
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -43,4 +43,4 @@ const DarkModeToggleButton = () => {
   );
 };
 
-export default DarkModeToggleButton;
+export default ModeToggleButton;
