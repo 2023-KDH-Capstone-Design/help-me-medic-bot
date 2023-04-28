@@ -6,7 +6,7 @@ const HospInfo = () => {
   return (
     <>
       <AppBar title="Hospital Information" />
-      <div></div>
+      <div className="p-2"></div>
     </>
   );
 };

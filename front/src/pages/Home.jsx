@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <>
       <AppBar title="Home" />
-      <div></div>
+      <div className="p-2"></div>
     </>
   );
 };

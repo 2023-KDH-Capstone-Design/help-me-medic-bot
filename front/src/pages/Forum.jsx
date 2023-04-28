@@ -7,8 +7,9 @@ const Forum = () => {
   return (
     <>
       <AppBar title="Forum" />
-      <Post />
-      <div></div>
+      <div className="p-2">
+        <Post />
+      </div>
     </>
   );
 };
