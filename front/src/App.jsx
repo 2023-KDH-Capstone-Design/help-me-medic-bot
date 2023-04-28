@@ -11,7 +11,7 @@ const App = () => {
   return (
     <div className="drawer drawer-mobile">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col bg-base-200">
+      <div className="drawer-content flex flex-col items-center bg-base-200">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/chat" element={<Chat />} />

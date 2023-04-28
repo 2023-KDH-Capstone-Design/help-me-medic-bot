@@ -18,7 +18,7 @@ const Chat = () => {
   return (
     <>
       <AppBar title="Chat" />
-      <div className="p-2">
+      <div className="flex w-full p-2" style={{ maxWidth: "1024px" }}>
         <div>{JSON.stringify(data)}</div>
       </div>
     </>

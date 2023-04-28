@@ -6,7 +6,7 @@ const HospInfo = () => {
   return (
     <>
       <AppBar title="Hospital Information" />
-      <div className="p-2"></div>
+      <div className="flex w-full p-2" style={{ maxWidth: "1024px" }}></div>
     </>
   );
 };
