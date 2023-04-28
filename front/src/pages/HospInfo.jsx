@@ -1,16 +1,14 @@
 import React from "react";
 
 import AppBar from "../components/ui/AppBar";
-import Post from "./Post";
 
-const Forum = () => {
+const HospInfo = () => {
   return (
     <>
-      <AppBar title="Forum" />
-      <Post />
+      <AppBar title="Hospital Information" />
       <div></div>
     </>
   );
 };
 
-export default Forum;
+export default HospInfo;

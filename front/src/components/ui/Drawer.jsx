@@ -20,6 +20,9 @@ const Drawer = () => {
         <li>
           <Link to="/forum">Forum</Link>
         </li>
+        <li>
+          <Link to="/hospinfo">Hospital Information</Link>
+        </li>
       </ul>
     </div>
   );

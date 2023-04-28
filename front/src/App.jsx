@@ -5,6 +5,7 @@ import Drawer from "./components/ui/Drawer";
 import Home from "./pages/Home";
 import Chat from "./pages/Chat";
 import Forum from "./pages/Forum";
+import HospInfo from "./pages/HospInfo";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/forum" element={<Forum />} />
+          <Route path="/hospinfo" element={<HospInfo />} />
         </Routes>
       </div>
       <Drawer />
