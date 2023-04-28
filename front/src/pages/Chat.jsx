@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import CustomAppBar from "../components/ui/CustomAppBar";
+import AppBar from "../components/ui/AppBar";
 
 const Chat = () => {
   const [data, setData] = useState([]);
@@ -17,7 +17,7 @@ const Chat = () => {
 
   return (
     <>
-      <CustomAppBar title="Chat" />
+      <AppBar title="Chat" />
       <div className="p-2">
         <div>{JSON.stringify(data)}</div>
       </div>

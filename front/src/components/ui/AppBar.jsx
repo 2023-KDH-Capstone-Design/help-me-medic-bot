@@ -2,7 +2,7 @@ import React from "react";
 
 import { FaBars } from "react-icons/fa";
 
-const CustomAppBar = (props) => {
+const AppBar = (props) => {
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
@@ -17,4 +17,4 @@ const CustomAppBar = (props) => {
   );
 };
 
-export default CustomAppBar;
+export default AppBar;

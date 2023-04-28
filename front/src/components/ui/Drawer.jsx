@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import DarkModeToggleButton from "./DarkModeToggleButton";
 
-const CustomDrawer = () => {
+const Drawer = () => {
   return (
     <div className="drawer-side">
       <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
@@ -25,4 +25,4 @@ const CustomDrawer = () => {
   );
 };
 
-export default CustomDrawer;
+export default Drawer;

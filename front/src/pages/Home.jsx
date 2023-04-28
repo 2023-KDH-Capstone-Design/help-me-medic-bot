@@ -1,11 +1,11 @@
 import React from "react";
 
-import CustomAppBar from "../components/ui/CustomAppBar";
+import AppBar from "../components/ui/AppBar";
 
 const Home = () => {
   return (
     <>
-      <CustomAppBar title="Home" />
+      <AppBar title="Home" />
       <div></div>
     </>
   );
