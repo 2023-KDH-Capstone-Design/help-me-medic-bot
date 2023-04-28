@@ -11,11 +11,17 @@
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
+    <style>
+      .offcanvas-end > .navbar-nav > .nav-item {
+        margin: 15px;
+        padding: 10px 10px;
+      }
+    </style>
   </head>
   <body>
     <nav class="navbar navbar-dark bg-primary fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">GOODOC</a>
+        <a class="navbar-brand" href="#">MediChat</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -33,7 +39,7 @@
         >
           <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasPrimaryNavbarLabel">
-              GOODOC
+              MediChat
             </h5>
             <button
               type="button"
@@ -66,6 +72,22 @@
               />
               <button class="btn btn-success" type="submit">Search</button>
             </form>
+          </div>
+          <div class="offcanvas-end" style="background-color: grey">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <div class="image">
+                  <img
+                    src="증명사진2.jpeg"
+                    class="rounded"
+                    alt="증명사진2.jpeg"
+                    width="30px"
+                    height="30px"
+                  />
+                  Name
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
