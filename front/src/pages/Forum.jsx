@@ -8,10 +8,13 @@ const Forum = () => {
   return (
     <>
       <AppBar title="Forum" />
-      <div className="flex w-full p-2" style={{ maxWidth: "1024px" }}>
+      <div
+        className="flex flex-col w-full gap-4 p-2"
+        style={{ maxWidth: "1024px" }}
+      >
         <Post />
+        <Comment />
       </div>
-      <Comment />
     </>
   );
 };

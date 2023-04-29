@@ -6,7 +6,10 @@ const HospInfo = () => {
   return (
     <>
       <AppBar title="Hospital Information" />
-      <div className="flex w-full p-2" style={{ maxWidth: "1024px" }}></div>
+      <div
+        className="flex flex-col w-full gap-4 p-2"
+        style={{ maxWidth: "1024px" }}
+      ></div>
     </>
   );
 };
