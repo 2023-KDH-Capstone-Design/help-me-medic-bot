@@ -10,12 +10,7 @@ const ChatForm = () => {
               <img src="kimdamae.jpg" alt="face" />
             </div>
           </div>
-          <div class="chat-header">
-            kim da mae
-            <time class="text-xs opacity-50">12:45</time>
-          </div>
           <div class="chat-bubble">나는 개입니다. 월월</div>
-          <div class="chat-footer opacity-50">Delivered</div>
         </div>
         <div class="chat chat-end mr-2">
           <div class="chat-image avatar">
@@ -23,12 +18,8 @@ const ChatForm = () => {
               <img src="dog.jpg" alt="face" />
             </div>
           </div>
-          <div class="chat-header">
-            jo boong sin
-            <time class="text-xs opacity-50">12:46</time>
-          </div>
+          <div class="chat-header"></div>
           <div class="chat-bubble">저는 조붕딱입미다.</div>
-          <div class="chat-footer opacity-50">Seen at 12:46</div>
         </div>
       </main>
       <form class="msger-inputarea">
