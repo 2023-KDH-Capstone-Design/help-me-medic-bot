@@ -38,7 +38,7 @@ const ModeToggleButton = () => {
       data-act-class="ACTIVECLASS"
       onClick={() => handleTheme()}
     >
-      {isDarkMode ? <FaSun /> : <FaMoon />}
+      {isDarkMode ? <FaSun size="20px" /> : <FaMoon size="20px" />}
     </div>
   );
 };
