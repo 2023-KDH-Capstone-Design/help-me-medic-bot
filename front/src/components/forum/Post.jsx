@@ -6,7 +6,7 @@ const Post = () => {
   return (
     <div className="card w-full bg-base-100 shadow-xl">
       <div className="card-body">
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-3">
           <div className="avatar">
             <div className="w-8 rounded">
               <img src="dog.jpg" alt="" />
