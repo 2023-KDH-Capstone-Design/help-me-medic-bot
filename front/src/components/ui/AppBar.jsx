@@ -11,7 +11,7 @@ const AppBar = (props) => {
           <FaBars />
         </label>
       </div>
-      <div className="flex-1 px-2 mx-2">{props.title}</div>
+      <div className="flex-1 px-2 mx-2 text-2xl">{props.title}</div>
       <div className="flex-0">
         <ModeToggleButton />
       </div>
