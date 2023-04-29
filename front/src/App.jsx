@@ -10,13 +10,13 @@ import Drawer from "./components/ui/Drawer";
 
 const App = () => {
   return (
-    <div className="bg-base-100 drawer drawer-mobile">
+    <div className="bg-base-300 drawer drawer-mobile">
       <input type="checkbox" id="drawer" className="drawer-toggle" />
       <div className="drawer-content">
         <div className="sticky top-0 z-30 flex h-16 w-full justify-center bg-opacity-90 backdrop-blur transition-all duration-100 bg-base-100 text-base-content shadow-sm">
           <AppBar title="title" />
         </div>
-        <div className="px-6 xl:pr-2 pb-16">
+        <div className="px-6 xl:pr-2 pb-16 mt-6">
           <div className="flex flex-col-reverse justify-between gap-6 xl:flex-row">
             <div className="w-full max-w-4xl flex-grow">
               <Routes>

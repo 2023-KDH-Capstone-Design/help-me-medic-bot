@@ -2,7 +2,7 @@ import React from "react";
 
 const ChatForm = () => {
   return (
-    <section class="msger w-full mx-auto flex flex-col gap-8 mt-8">
+    <section class="msger w-full mx-auto flex flex-col gap-8">
       <main class="msger-chat">
         <div class="chat chat-end mr-2">
           <div class="chat-image avatar">
