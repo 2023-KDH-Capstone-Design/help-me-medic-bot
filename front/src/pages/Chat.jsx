@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import AppBar from "../components/ui/AppBar";
-
 const Chat = () => {
   const [data, setData] = useState([]);
 
@@ -17,13 +15,7 @@ const Chat = () => {
 
   return (
     <>
-      <AppBar title="Chat" />
-      <div
-        className="flex flex-col w-full gap-4 p-2"
-        style={{ maxWidth: "1024px" }}
-      >
-        <div>{JSON.stringify(data)}</div>
-      </div>
+      <div>{JSON.stringify(data)}</div>
     </>
   );
 };
