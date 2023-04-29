@@ -16,13 +16,13 @@ const Post = () => {
         </div>
         <p className="my-2 text-lg">어디로 가야하오</p>
         <div className="form-control">
-          <div className="input-group input-group-md">
+          <div className="input-group">
             <input
               type="text"
               placeholder="Comment"
-              className="input input-bordered input-md w-full"
+              className="input input-bordered w-full"
             />
-            <button className="btn btn-square btn-md">
+            <button className="btn btn-square">
               <BsSend size="16px" />
             </button>
           </div>
