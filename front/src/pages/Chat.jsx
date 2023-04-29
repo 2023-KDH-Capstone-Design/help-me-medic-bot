@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import ChatForm from "../components/chat/ChatForm";
 
 const Chat = () => {
   const [data, setData] = useState([]);
@@ -15,6 +16,7 @@ const Chat = () => {
 
   return (
     <>
+      <ChatForm />
       <div>{JSON.stringify(data)}</div>
     </>
   );
