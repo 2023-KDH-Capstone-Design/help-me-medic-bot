@@ -5,10 +5,10 @@ import Post from "../components/forum/Post";
 
 const Forum = () => {
   return (
-    <>
+    <div className="flex flex-col gap-4">
       <PostForm />
       <Post />
-    </>
+    </div>
   );
 };
 
