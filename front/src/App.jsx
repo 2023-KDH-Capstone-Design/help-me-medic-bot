@@ -1,11 +1,11 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import Drawer from "./components/ui/Drawer";
 import Home from "./pages/Home";
 import Chat from "./pages/Chat";
 import Forum from "./pages/Forum";
 import HospInfo from "./pages/HospInfo";
+import Drawer from "./components/ui/Drawer";
 
 const App = () => {
   return (
