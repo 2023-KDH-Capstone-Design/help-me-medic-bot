@@ -5,7 +5,7 @@ import ChatForm from "../components/chat/ChatForm";
 
 const Chat = () => {
   return (
-    <section class="msger w-full mx-auto flex flex-col gap-8">
+    <section className="msger w-full mx-auto flex flex-col gap-8">
       <ChatLog />
       <ChatForm />
     </section>
