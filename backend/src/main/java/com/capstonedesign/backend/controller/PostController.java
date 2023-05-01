@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -43,7 +44,7 @@ public class PostController {
     List<Post> posts = postService.findAll();
     List<DetailPostResponseDTO> collect = posts.stream().map(p ->
         new DetailPostResponseDTO(p.getId(), p.getMember().getName(), p.getTitle(), p.getContent(),
-            p.getCreatedAt(), p.getUpdatedAt())).toList();
+            p.getCreatedAt(), p.getUpdatedAt())).collect(Collectors.toList());
 
     return new ListPostResponse<>(collect.size(), collect);
 

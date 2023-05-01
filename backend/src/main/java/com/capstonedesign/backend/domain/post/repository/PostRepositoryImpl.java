@@ -1,7 +1,7 @@
 package com.capstonedesign.backend.domain.post.repository;
 
 import com.capstonedesign.backend.domain.post.Post;
-import jakarta.persistence.EntityManager;
+import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
