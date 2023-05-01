@@ -7,6 +7,7 @@ import Chat from "./pages/Chat";
 import Forum from "./pages/Forum";
 import HospInfo from "./pages/HospInfo";
 import Drawer from "./components/ui/Drawer";
+import Advertisement from "./components/advertisements/Advertisement";
 
 const App = () => {
   return (
@@ -28,8 +29,7 @@ const App = () => {
             </div>
             <div>
               <div className="sticky top-20 xl:mt-32 my-6 xl:my-0 xl:w-[130px]">
-                <div>광고 1</div>
-                <div>광고 2</div>
+                <Advertisement />
               </div>
             </div>
           </div>
