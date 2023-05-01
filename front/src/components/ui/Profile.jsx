@@ -9,21 +9,19 @@ const Profile = () => {
         <span className="inline-flex">Name</span>
       </div>
       <div className="flex-none dropdown dropdown-top dropdown-end">
-        <label tabIndex={5} className="btn btn-outline btn-accent btn-xs m-1">
+        <label tabIndex={5} className="btn btn-outline btn-xs m-1">
           menu
         </label>
         <ul
           tabIndex={0}
-          className="dropdown-content menu menu-compact shadow bg-base-200 rounded-box w-52"
+          className="dropdown-content menu shadow bg-base-200 rounded-box w-52"
         >
           <li>
             <Link to="/">Help & FAQ</Link>
           </li>
-          <div className="h-1"></div>
           <li>
             <Link to="/">Settings</Link>
           </li>
-          <div className="h-1"></div>
           <li>
             <Link to="/">Log out</Link>
           </li>
