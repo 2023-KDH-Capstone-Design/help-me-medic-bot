@@ -7,8 +7,8 @@ import com.capstonedesign.backend.domain.login.service.dto.response.DetailSessio
 import com.capstonedesign.backend.domain.login.service.dto.response.LoginResponseDTO;
 import com.capstonedesign.backend.domain.login.service.dto.response.LogoutResponseDTO;
 import com.capstonedesign.backend.domain.member.Member;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;

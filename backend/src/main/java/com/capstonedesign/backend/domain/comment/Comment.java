@@ -2,7 +2,7 @@ package com.capstonedesign.backend.domain.comment;
 
 import com.capstonedesign.backend.domain.member.Member;
 import com.capstonedesign.backend.domain.post.Post;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 

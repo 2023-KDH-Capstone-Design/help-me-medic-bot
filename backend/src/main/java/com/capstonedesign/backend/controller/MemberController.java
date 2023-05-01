@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -40,7 +41,7 @@ public class MemberController {
 
     List<Member> memberList = memberService.findAll();
     List<DetailMemberResponseDTO> listMemberData = memberList.stream().map(m -> new DetailMemberResponseDTO(m.getId(), m.getName(), m.getAge()))
-        .toList();
+        .collect(Collectors.toList());
 
     return new ListMemberResponse<>(listMemberData.size(), listMemberData);
   }
