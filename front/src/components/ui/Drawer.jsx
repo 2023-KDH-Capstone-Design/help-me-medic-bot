@@ -1,4 +1,5 @@
 import React from "react";
+import Profile from "../profile/Profile";
 import { Link } from "react-router-dom";
 
 import { BsChatDots, BsPeople, BsPlusSquare } from "react-icons/bs";
@@ -42,6 +43,9 @@ const Drawer = () => {
               <span className="flex-1">Hospital Information</span>
             </Link>
           </li>
+        </ul>
+        <ul className="absolute inset-x-0 bottom-0 menu menu-responsive flex flex-col flex-bottom p-2 px-4">
+          <Profile />
         </ul>
       </aside>
     </div>
