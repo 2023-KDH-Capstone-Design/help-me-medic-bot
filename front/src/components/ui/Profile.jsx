@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   return (
@@ -16,15 +17,15 @@ const Profile = () => {
           className="dropdown-content menu menu-compact shadow bg-base-200 rounded-box w-52"
         >
           <li>
-            <a href="#">Help & FAQ</a>
+            <Link to="/">Help & FAQ</Link>
           </li>
-          <div className="my-1.5 h-px bg-black" role="none"></div>
+          <div className="h-1"></div>
           <li>
-            <a href="#">Settings</a>
+            <Link to="/">Settings</Link>
           </li>
-          <div className="my-1.5 h-px bg-black" role="none"></div>
-          <li href="#">
-            <a>Log out</a>
+          <div className="h-1"></div>
+          <li>
+            <Link to="/">Log out</Link>
           </li>
         </ul>
       </div>
