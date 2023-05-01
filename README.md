@@ -1,2 +1,2 @@
-# project1
-Github Projects 테스트용 리포지토리
+# Help me! Medic bot!
+프로젝트 레파지토리
