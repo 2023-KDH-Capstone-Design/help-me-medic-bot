@@ -13,7 +13,7 @@ const PostForm = () => {
           placeholder="What's on your mind?"
         />
         <div className="card-actions justify-end">
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary w-full">
             Post
           </button>
         </div>
