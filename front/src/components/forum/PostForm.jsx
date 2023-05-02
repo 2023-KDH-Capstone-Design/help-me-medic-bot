@@ -9,7 +9,7 @@ const PostForm = () => {
     <form className="card w-full bg-base-100 shadow-xl" onSubmit={handleSubmit}>
       <div className="card-body">
         <textarea
-          className="textarea textarea-bordered"
+          className="textarea textarea-lg textarea-bordered"
           placeholder="What's on your mind?"
         />
         <div className="card-actions justify-end">
