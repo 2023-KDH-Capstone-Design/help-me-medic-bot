@@ -16,7 +16,7 @@ const App = () => {
         <div className="sticky top-0 z-30 flex h-16 w-full justify-center bg-opacity-90 backdrop-blur transition-all duration-100 bg-base-100 text-base-content shadow-sm">
           <AppBar title="title" />
         </div>
-        <div className="px-6 xl:pr-2 pb-16 mt-6">
+        <div className="px-6 xl:pr-2 mt-6">
           <div className="flex flex-col-reverse justify-between gap-6 xl:flex-row">
             <div className="w-full max-w-4xl flex-grow">
               <Routes>
