@@ -5,9 +5,8 @@ import AppBar from "./components/ui/AppBar";
 import Home from "./pages/Home";
 import Chat from "./pages/Chat";
 import Forum from "./pages/Forum";
-import HospInfo from "./pages/HospInfo";
+import Advertisement from "./components/ui/Advertisement";
 import Drawer from "./components/ui/Drawer";
-import Advertisement from "./components/advertisements/Advertisement";
 
 const App = () => {
   return (
@@ -24,7 +23,6 @@ const App = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/chat" element={<Chat />} />
                 <Route path="/forum" element={<Forum />} />
-                <Route path="/hospinfo" element={<HospInfo />} />
               </Routes>
             </div>
             <div>

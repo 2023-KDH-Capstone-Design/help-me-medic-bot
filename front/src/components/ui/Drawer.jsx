@@ -2,7 +2,7 @@ import React from "react";
 import Profile from "./Profile";
 import { Link } from "react-router-dom";
 
-import { BsChatDots, BsPeople, BsPlusSquare } from "react-icons/bs";
+import { BsChatDots, BsPeople } from "react-icons/bs";
 
 const Drawer = () => {
   return (
@@ -35,16 +35,8 @@ const Drawer = () => {
               <span className="flex-1">Forum</span>
             </Link>
           </li>
-          <li>
-            <Link to="/hospinfo" className="flex gap-4">
-              <span className="flex-none">
-                <BsPlusSquare size="24px" />
-              </span>
-              <span className="flex-1">Hospital Information</span>
-            </Link>
-          </li>
         </ul>
-        <div className="fixed bottom-0 w-full p-2 px-4">
+        <div className="fixed bottom-0 w-full p-4">
           <Profile />
         </div>
       </aside>
