@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 const Profile = () => {
   return (
     <div className="flex justify-between">
-      <div className="flex items-center space-x-3 flex-0">
+      <div className="flex items-center space-x-3">
         <img src="kimdamae.jpg" alt="face" className="w-8 h-8 rounded" />
         <span className="inline-flex">Name</span>
       </div>
-      <div className="flex-none dropdown dropdown-top dropdown-end">
+      <div className="dropdown dropdown-top dropdown-end">
         <label tabIndex={5} className="btn btn-outline btn-xs m-1">
           menu
         </label>
