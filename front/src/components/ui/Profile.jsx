@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import profileImage from "../../assets/images/kimdamae.jpg";
+
 const Profile = () => {
   return (
     <div className="flex justify-between">
       <div className="flex items-center space-x-3">
-        <img src="kimdamae.jpg" alt="face" className="w-8 h-8 rounded" />
+        <img src={profileImage} alt="face" className="w-8 h-8 rounded" />
         <span className="inline-flex">Name</span>
       </div>
       <div className="dropdown dropdown-top dropdown-end">

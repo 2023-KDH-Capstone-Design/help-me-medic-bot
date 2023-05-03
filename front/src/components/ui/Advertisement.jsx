@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-import "./Advertisement.css";
+import "../../styles/Advertisement.css";
 
 const Advertisement = () => {
   const reference = useRef();

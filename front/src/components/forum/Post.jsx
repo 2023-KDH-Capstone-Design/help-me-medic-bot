@@ -1,5 +1,6 @@
 import React from "react";
 
+import profileImage from "../../assets/images/dog.jpg";
 import { IoSend } from "react-icons/io5";
 import Comment from "./Comment";
 
@@ -10,7 +11,7 @@ const Post = () => {
         <div className="flex items-center space-x-3">
           <div className="avatar">
             <div className="w-9 rounded">
-              <img src="dog.jpg" alt="" />
+              <img src={profileImage} alt="" />
             </div>
           </div>
           <p>Name</p>
