@@ -1,5 +1,7 @@
 import React from "react";
 
+import { BsSend } from "react-icons/bs";
+
 const ChatForm = () => {
   return (
     <form className="sticky bottom-0 p-4 msger-inputarea bg-gradient-to-t from-base-300 via-base-300">
@@ -10,7 +12,9 @@ const ChatForm = () => {
             placeholder="Type here"
             className="input input-bordered w-full"
           />
-          <button className="btn btn-info">Send</button>
+          <button className="btn">
+            <BsSend size="16px" />
+          </button>
         </div>
       </div>
     </form>
