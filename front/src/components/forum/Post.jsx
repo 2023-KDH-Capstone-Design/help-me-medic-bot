@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BsSend } from "react-icons/bs";
+import { IoSend } from "react-icons/io5";
 import Comment from "./Comment";
 
 const Post = () => {
@@ -24,7 +24,7 @@ const Post = () => {
               className="input input-bordered w-full"
             />
             <button className="btn btn-square">
-              <BsSend size="16px" />
+              <IoSend size="16px" />
             </button>
           </div>
         </div>
