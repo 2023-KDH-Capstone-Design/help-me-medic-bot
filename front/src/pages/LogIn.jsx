@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 // import axios from "axios";
 
 const LogIn = () => {
@@ -73,12 +74,12 @@ const LogIn = () => {
           <div className="flex flex-col gap-2">
             <div className="flex gap-2">
               Don't have an account?
-              <a
-                href="#"
+              <Link
+                to="/"
                 className="text-gray-600 hover:underline hover:text-blue-600"
               >
                 Sign up
-              </a>
+              </Link>
             </div>
             <button className="btn btn-block" onClick={handleLogIn}>
               Login
