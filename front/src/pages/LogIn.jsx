@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+
+import SignUp from "./SignUp";
 // import axios from "axios";
 
 const LogIn = () => {
   const [inputId, setInputId] = useState("");
   const [inputPw, setInputPw] = useState("");
+  const [isSignUp, setIsSignUp] = useState(false);
 
   const handleInputId = (e) => {
     setInputId(e.target.value);
@@ -37,6 +40,10 @@ const LogIn = () => {
     sessionStorage.setItem("user_id", inputId);
     sessionStorage.setItem("name", inputId);
     document.location.href = "/";
+  };
+
+  const singupHandler = () => {
+    setIsSignUp(true);
   };
 
   return (
@@ -77,9 +84,11 @@ const LogIn = () => {
               <Link
                 to="/"
                 className="text-gray-600 hover:underline hover:text-blue-600"
+                onClick={singupHandler}
               >
                 Sign up
               </Link>
+              {isSignUp && <SignUp />}
             </div>
             <button className="btn btn-block" onClick={handleLogIn}>
               Login
