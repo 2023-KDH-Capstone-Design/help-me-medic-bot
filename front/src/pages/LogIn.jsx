@@ -48,54 +48,56 @@ const LogIn = () => {
 
   return (
     <div className="relative flex flex-col justify-center h-screen overflow-hidden">
-      <div className="w-[80%] p-6 space-y-4 m-auto bg-white rounded-md shadow-md ring-2 ring-gray-800/50 md:max-w-md">
-        <h1 className="font-semibold text-center text-gray-700">
-          <div className="text-primary inline-flex text-lg transition-all duration-200 md:text-3xl">
-            <span className="lowercase">Medi</span>
-            <span className="text-base-content uppercase">Chat</span>
-          </div>
-        </h1>
-        <form className="space-y-4">
-          <div>
-            <label className="label">
-              <span className="text-base label-text">Email</span>
-            </label>
-            <input
-              type="email"
-              placeholder="Email Address"
-              className="w-full input input-bordered"
-              onChange={handleInputId}
-            />
-          </div>
-          <div>
-            <label className="label">
-              <span className="text-base label-text">Password</span>
-            </label>
-            <input
-              type="password"
-              placeholder="Enter Password"
-              className="w-full input input-bordered"
-              onChange={handleInputPw}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <div className="flex gap-2">
-              Don't have an account?
-              <Link
-                to="/"
-                className="text-gray-600 hover:underline hover:text-blue-600"
-                onClick={singupHandler}
-              >
-                Sign up
-              </Link>
-              {isSignUp && <SignUp />}
+      {!isSignUp && (
+        <div className="w-[80%] p-6 space-y-4 m-auto bg-white rounded-md shadow-md ring-2 ring-gray-800/50 md:max-w-md">
+          <h1 className="font-semibold text-center text-gray-700">
+            <div className="text-primary inline-flex text-lg transition-all duration-200 md:text-3xl">
+              <span className="lowercase">Medi</span>
+              <span className="text-base-content uppercase">Chat</span>
             </div>
-            <button className="btn btn-block" onClick={handleLogIn}>
-              Login
-            </button>
-          </div>
-        </form>
-      </div>
+          </h1>
+          <form className="space-y-4">
+            <div>
+              <label className="label">
+                <span className="text-base label-text">Email</span>
+              </label>
+              <input
+                type="email"
+                placeholder="Email Address"
+                className="w-full input input-bordered"
+                onChange={handleInputId}
+              />
+            </div>
+            <div>
+              <label className="label">
+                <span className="text-base label-text">Password</span>
+              </label>
+              <input
+                type="password"
+                placeholder="Enter Password"
+                className="w-full input input-bordered"
+                onChange={handleInputPw}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <div className="flex gap-2">
+                Don't have an account?
+                <Link
+                  to="/"
+                  className="text-gray-600 hover:underline hover:text-blue-600"
+                  onClick={singupHandler}
+                >
+                  Sign up
+                </Link>
+              </div>
+              <button className="btn btn-block" onClick={handleLogIn}>
+                Login
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+      {isSignUp && <SignUp />}
     </div>
   );
 };
