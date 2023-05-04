@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import profileImage from "../../assets/images/kimdamae.jpg";
+import profileImage from "../../../assets/images/kimdamae.jpg";
 
 const Profile = () => {
   const navigate = useNavigate();

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, Routes, Route } from "react-router-dom";
 
-import AppBar from "../components/ui/AppBar";
 import Home from "./Home";
 import Chat from "./Chat";
 import Forum from "./Forum";
-import Advertisement from "../components/ui/Advertisement";
-import Drawer from "../components/ui/Drawer";
+import AppBar from "../components/ui/navbar/AppBar";
+import Advertisement from "../components/ui/ads/Advertisement";
+import Drawer from "../components/ui/drawer/Drawer";
 
 const pages = [
   { id: 0, path: "/", title: "Home", comp: <Home /> },
