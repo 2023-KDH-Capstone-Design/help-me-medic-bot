@@ -1,10 +1,13 @@
 import React from "react";
 
-const Modal = () => {
+const Modal = (props) => {
   return (
     <>
-      <label htmlFor="my-modal" className="btn sticky bottom-4">
-        OO 병원
+      <label
+        htmlFor="my-modal"
+        className="btn btn-outline btn-primary rounded-xl"
+      >
+        {props.label}
       </label>
       <input
         type="checkbox"
@@ -13,8 +16,8 @@ const Modal = () => {
       />
       <label htmlFor="my-modal" className="modal cursor-pointer">
         <label className="modal-box relative" htmlFor="">
-          <h3 className="text-lg font-bold">O O 병 원</h3>
-          <p className="py-4">OO 병원에 관한 정보입니다.</p>
+          <h3 className="text-lg font-bold">{props.label}</h3>
+          <p className="py-4">{`${props.label}에 관한 정보입니다.`}</p>
         </label>
       </label>
     </>
