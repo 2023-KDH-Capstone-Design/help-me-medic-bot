@@ -1,23 +1,22 @@
 import React from "react";
 
 const Modal = (props) => {
+  const { label } = props;
+  const id = `modal-${label.toLowerCase().replace(/\s+/g, "-")}`;
   return (
     <>
-      <label
-        htmlFor="my-modal"
-        className="btn btn-outline btn-primary rounded-xl"
-      >
-        {props.label}
+      <label htmlFor={id} className="btn btn-outline btn-primary rounded-xl">
+        {label}
       </label>
       <input
         type="checkbox"
-        id="my-modal"
+        id={id}
         className="modal-toggle flex items-center"
       />
-      <label htmlFor="my-modal" className="modal cursor-pointer">
-        <label className="modal-box relative" htmlFor="">
-          <h3 className="text-lg font-bold">{props.label}</h3>
-          <p className="py-4">{`${props.label}에 관한 정보입니다.`}</p>
+      <label htmlFor={id} className="modal cursor-pointer">
+        <label className="modal-box relative" htmlFor={id}>
+          <h3 className="text-lg font-bold">{label}</h3>
+          <p className="py-4">{`${label}에 관한 정보입니다.`}</p>
         </label>
       </label>
     </>
