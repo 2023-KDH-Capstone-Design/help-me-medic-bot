@@ -1,7 +1,5 @@
 import React from "react";
 
-import KakaoMap from "./KakaoMap";
-
 const Modal = (props) => {
   const { label } = props;
   const id = `modal-${label.toLowerCase().replace(/\s+/g, "-")}`;
@@ -10,20 +8,20 @@ const Modal = (props) => {
     <>
       <input type="checkbox" id={id} className="modal-toggle" />
       <label htmlFor={id} className="modal cursor-pointer">
-        <label className="modal-box relative w-11/12 max-w-5xl">
+        <label className="modal-box absolute w-11/12 max-w-5xl">
           <label
             htmlFor={id}
             className="btn btn-sm btn-circle absolute right-2 top-2"
+            onClick={props.onClose}
           >
             ✕
           </label>
           <h3 className="text-lg font-bold">{label}</h3>
           <p className="py-4">{`${label}에 관한 정보입니다.`}</p>
-          <KakaoMap />
+          {props.children}
         </label>
       </label>
     </>
   );
 };
-
 export default Modal;
