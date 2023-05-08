@@ -3,6 +3,7 @@ import React from "react";
 const Modal = (props) => {
   const { label } = props;
   const id = `modal-${label.toLowerCase().replace(/\s+/g, "-")}`;
+
   return (
     <>
       <label htmlFor={id} className="btn btn-outline btn-primary rounded-xl">
