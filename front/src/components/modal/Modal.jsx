@@ -8,15 +8,11 @@ const Modal = (props) => {
 
   return (
     <>
-      <input
-        type="checkbox"
-        id={id}
-        className="modal-toggle flex items-center"
-      />
+      <input type="checkbox" id={id} className="modal-toggle" />
       <label htmlFor={id} className="modal cursor-pointer">
-        <label className="modal-box relative w-11/12 max-w-5xl" htmlFor={id}>
+        <label className="modal-box relative w-11/12 max-w-5xl">
           <label
-            htmlFor="my-modal-3"
+            htmlFor={id}
             className="btn btn-sm btn-circle absolute right-2 top-2"
           >
             ✕
