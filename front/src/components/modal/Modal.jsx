@@ -1,6 +1,6 @@
 import React from "react";
 
-import KakaoMap from "./KakaoMap";
+import NaverMap from "./NaverMap";
 
 const Modal = (props) => {
   const { label } = props;
@@ -19,7 +19,7 @@ const Modal = (props) => {
           </label>
           <h3 className="text-lg font-bold">{label}</h3>
           <p className="py-4">{`${label}에 관한 정보입니다.`}</p>
-          <KakaoMap label={label} />
+          <NaverMap label={label} />
         </label>
       </label>
     </>
