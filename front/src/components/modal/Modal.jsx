@@ -1,23 +1,29 @@
 import React from "react";
 
+import KakaoMap from "./KakaoMap";
+
 const Modal = (props) => {
   const { label } = props;
   const id = `modal-${label.toLowerCase().replace(/\s+/g, "-")}`;
 
   return (
     <>
-      <label htmlFor={id} className="btn btn-outline btn-primary rounded-xl">
-        {label}
-      </label>
       <input
         type="checkbox"
         id={id}
         className="modal-toggle flex items-center"
       />
       <label htmlFor={id} className="modal cursor-pointer">
-        <label className="modal-box relative" htmlFor={id}>
+        <label className="modal-box relative w-11/12 max-w-5xl" htmlFor={id}>
+          <label
+            htmlFor="my-modal-3"
+            className="btn btn-sm btn-circle absolute right-2 top-2"
+          >
+            ✕
+          </label>
           <h3 className="text-lg font-bold">{label}</h3>
           <p className="py-4">{`${label}에 관한 정보입니다.`}</p>
+          <KakaoMap />
         </label>
       </label>
     </>

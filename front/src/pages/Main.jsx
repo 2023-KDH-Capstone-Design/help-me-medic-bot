@@ -7,6 +7,7 @@ import Forum from "./Forum";
 import AppBar from "../components/ui/navbar/AppBar";
 import Advertisement from "../components/ui/ads/Advertisement";
 import Drawer from "../components/ui/drawer/Drawer";
+import Modal from "../components/modal/Modal";
 
 const pages = [
   { id: 0, path: "/", title: "Home", comp: <Home /> },
@@ -48,6 +49,9 @@ const Main = () => {
         </div>
       </div>
       <Drawer />
+      <Modal label="서울 아산 병원" />
+      <Modal label="세브란스 병원" />
+      <Modal label="서울대 병원" />
     </div>
   );
 };
