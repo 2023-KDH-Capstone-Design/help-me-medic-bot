@@ -1,6 +1,6 @@
 package com.capstonedesign.backend.controller;
 
-import com.capstonedesign.backend.SessionConst;
+import com.capstonedesign.backend.config.SessionConstConfig;
 import com.capstonedesign.backend.domain.login.service.LoginService;
 import com.capstonedesign.backend.domain.login.service.dto.request.LoginRequestDTO;
 import com.capstonedesign.backend.domain.login.service.dto.response.DetailSessionResponseDTO;
@@ -37,7 +37,7 @@ public class LoginController {
     }
 
     HttpSession session = request.getSession();
-    session.setAttribute(SessionConst.SESSION_KEY, loginMember);
+    session.setAttribute(SessionConstConfig.SESSION_KEY, loginMember);
 
     return new LoginResponseDTO(loginMember.getId(), loginMember.getLoginId(), loginMember.getPassword(), loginMember.getName(), loginMember.getAge());
   }
@@ -58,8 +58,8 @@ public class LoginController {
 
     HttpSession session = request.getSession(false);
 
-    if (!Objects.isNull(session) && !Objects.isNull(session.getAttribute(SessionConst.SESSION_KEY))) {
-      Member loginMember = (Member) session.getAttribute(SessionConst.SESSION_KEY);
+    if (!Objects.isNull(session) && !Objects.isNull(session.getAttribute(SessionConstConfig.SESSION_KEY))) {
+      Member loginMember = (Member) session.getAttribute(SessionConstConfig.SESSION_KEY);
       return new DetailSessionResponseDTO(loginMember.getId(), loginMember.getLoginId(), loginMember.getName(), loginMember.getAge());
     } else {
       return new DetailSessionResponseDTO(-1L, "", "", -1);
