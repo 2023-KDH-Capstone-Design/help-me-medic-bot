@@ -9,6 +9,9 @@ import com.capstonedesign.backend.domain.login.service.dto.response.LogoutRespon
 import com.capstonedesign.backend.domain.member.Member;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +24,13 @@ import java.util.Objects;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+@Api(tags = "로그인 관련 API")
 public class LoginController {
 
   private final LoginService loginService;
 
   @PostMapping("/login")
+  @ApiOperation(value = "로그인 API", notes = "아이디 및 비밀번호를 요청 파라미터로 하여 로그인")
   public LoginResponseDTO login(@RequestBody LoginRequestDTO loginRequestDTO, HttpServletRequest request) {
 
     Member loginMember = loginService.login(loginRequestDTO.getLoginId(), loginRequestDTO.getPassword());
@@ -43,6 +48,7 @@ public class LoginController {
   }
 
   @PostMapping("/logout")
+  @ApiOperation(value = "로그아웃 API", notes = "사용자 로그아웃 (세션 만료)")
   public LogoutResponseDTO logout(HttpServletRequest request) {
 
     HttpSession session = request.getSession(false);
@@ -54,6 +60,7 @@ public class LoginController {
   }
 
   @GetMapping("/session")
+  @ApiOperation(value = "사용자 세션 체크 API", notes = "사용자가 세션 보유여부 확인 및 세션정보 상세 조회 ")
   public DetailSessionResponseDTO detailSession(HttpServletRequest request) {
 
     HttpSession session = request.getSession(false);
