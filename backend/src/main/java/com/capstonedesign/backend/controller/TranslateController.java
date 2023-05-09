@@ -1,6 +1,8 @@
 package com.capstonedesign.backend.controller;
 
 import com.capstonedesign.backend.domain.translate.dto.request.TranslateRequest;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
@@ -13,11 +15,11 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 @RestController
-@RequiredArgsConstructor
-@Slf4j
+@Api(tags = "번역 관련 API")
 public class TranslateController {
 
   @PostMapping("/translate")
+  @ApiOperation(value = "번역 API", notes = "출발 언어, 도착 언어 및  번역할 텍스트를 요청 파라미터로 하여 번역")
   public String translate(@RequestBody TranslateRequest request) {
 
     String clientId = "Client ID"; // Client ID 및 Client Secret은 자신의 인증 정보를 발급 후 수정
