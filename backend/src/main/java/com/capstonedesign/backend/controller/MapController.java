@@ -1,5 +1,7 @@
 package com.capstonedesign.backend.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,13 +17,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@Api(tags = "지도 관련 API")
 public class MapController {
 
   @GetMapping("/search/place")
+  @ApiOperation(value = "장소 검색 API", notes = "문자열을 요청 파라미터로 하여 장소 검색")
   public ResponseEntity<String> searchPlace(@RequestBody String keyword) {
 
-    String clientId = "XhU9XXxpUipw_7Qef82n"; //애플리케이션 클라이언트 아이디
-    String clientSecret = "iocU_LNh5S"; //애플리케이션 클라이언트 시크릿
+    String clientId = "Client ID"; // Client ID 및 Client Secret은 자신의 인증 정보를 발급 후 수정
+    String clientSecret = "Client Secret";
 
 
     String text;
