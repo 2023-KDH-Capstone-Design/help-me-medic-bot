@@ -2,7 +2,7 @@ import React from "react";
 
 import profileImage from "../../assets/images/dog.jpg";
 
-const ReqChatBubble = () => {
+const ReqChatBubble = (props) => {
   return (
     <div className="chat chat-end mr-2">
       <div className="chat-image avatar">
@@ -10,7 +10,7 @@ const ReqChatBubble = () => {
           <img src={profileImage} alt="face" />
         </div>
       </div>
-      <div className="chat-bubble">저는 조붕딱입미다.</div>
+      <div className="chat-bubble">{props.message}</div>
     </div>
   );
 };
