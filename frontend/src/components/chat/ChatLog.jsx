@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 
 import ReqChatBubble from "./ReqChatBubble";
 import ResChatBubble from "./ResChatBubble";
-import ModalToggle from "../modal/ModalToggle";
+// import ModalToggle from "../modal/ModalToggle";
 import "../../styles/ChatLog.css";
 
 const ChatLog = (props) => {
