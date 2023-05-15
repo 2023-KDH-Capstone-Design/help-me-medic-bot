@@ -3,10 +3,11 @@ import React from "react";
 import ReqChatBubble from "./ReqChatBubble";
 import ResChatBubble from "./ResChatBubble";
 import ModalToggle from "../modal/ModalToggle";
+import "../../styles/ChatLog.css";
 
 const ChatLog = (props) => {
   return (
-    <main className="msger-chat" style={{ minHeight: "calc(100vh - 200px)" }}>
+    <main className="msger-chat">
       {props.log.map((chat) => {
         if (chat.type === "req") {
           return <ReqChatBubble key={chat.id} message={chat.value} />;
