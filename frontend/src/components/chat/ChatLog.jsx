@@ -10,7 +10,7 @@ const ChatLog = (props) => {
       {props.log.map((chat) => {
         if (chat.type === "req") {
           return <ReqChatBubble key={chat.id} message={chat.value} />;
-        } else if (chat.type === "res") {
+        } else {
           return <ResChatBubble key={chat.id} message={chat.value} />;
         }
       })}
