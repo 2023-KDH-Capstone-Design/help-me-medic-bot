@@ -1,101 +1,89 @@
 package com.capstonedesign.backend.controller;
 
+import com.capstonedesign.backend.domain.map.dto.request.PlaceSearchRequest;
+import com.capstonedesign.backend.domain.map.dto.response.PlaceSearchResponseByCustom;
+import com.capstonedesign.backend.domain.map.dto.response.PlaceSearchResponseByGoogle;
+import com.capstonedesign.backend.domain.map.dto.response.PlaceSearchResponseSortedByRating;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpHeaders;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @RestController
 @Api(tags = "지도 관련 API")
 public class MapController {
-
   @PostMapping("/search/place")
-  @ApiOperation(value = "장소 검색 API", notes = "문자열을 요청 파라미터로 하여 장소 검색")
-  public ResponseEntity<String> searchPlace(@RequestBody String keyword) {
+  @ApiOperation(value = "장소 검색 API", notes = "검색어, 장소 유형, 반경과 위도 경도 등을 요청 파라미터로 하여 장소 검색")
+  public PlaceSearchResponseByCustom<List<PlaceSearchResponseSortedByRating>> searchPlace(@RequestBody PlaceSearchRequest request) {
 
-    String clientId = "Client ID"; // Client ID 및 Client Secret은 자신의 인증 정보를 발급 후 수정
-    String clientSecret = "Client Secret";
+    String key = "AIzaSyD8kuBD0jS2AmkmbSPnl6ONEg5OrW55Spk";
 
+    /*
+      장소 목록 검색
+     */
+    String apiURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json" +
+        "?location=" + request.getLatitude() + "," + request.getLongitude() +
+        "&radius=" + request.getRadius() +
+        "&type=" + request.getType() +
+        "&keyword=" + request.getKeyword() +
+        "&key=" + key;
 
-    String text;
-    text = URLEncoder.encode(keyword, StandardCharsets.UTF_8);
+    /*
+      단일 장소 검색
+     */
+//    String apiURL2 = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json" +
+//        "?input=" + request.getKeyword() +
+//        "&locationbias=circle:" + request.getRadius() + "@" + request.getLatitude() + "," + request.getLongitude() +
+//        "&fields=formatted_address,name,rating,opening_hours,place_id,geometry,type" +
+//        "&inputtype=textquery" +
+//        "&language=ko" +
+//        "&key=" + key;
 
+    /*
+      단일 장소 세부정보 검색
+     */
+//    String place_id = "ChIJZUnrlhNaezUR-VgFZQhPLeg";
+//    String apiURL3 =
+//        "https://maps.googleapis.com/maps/api/place/details/json" +
+//            "?place_id=" + place_id +
+//            "&fields=name,rating,formatted_address,geometry,opening_hours,rating,reviews" +
+//            "&language=ko" +
+//            "&key=" + key;
 
-    String apiURL = "https://openapi.naver.com/v1/search/local?query=" + text + "&display=10&start=1&sort=random";    // JSON 결과
-    //String apiURL = "https://openapi.naver.com/v1/search/local.xml?query="+ text; // XML 결과
+    // 장소 목록 검색 API 요청
+    WebClient client = WebClient.builder()
+        .baseUrl(apiURL)
+        .defaultHeader(HttpHeaders.ACCEPT_LANGUAGE, "ko-KR") // accept-language 헤더 추가
+        .build();
 
+    Mono<PlaceSearchResponseByGoogle> response = client.get()
+        .uri(apiURL)
+        .retrieve()
+        .bodyToMono(new ParameterizedTypeReference<>() {
+        });
 
-    Map<String, String> requestHeaders = new HashMap<>();
-    requestHeaders.put("X-Naver-Client-Id", clientId);
-    requestHeaders.put("X-Naver-Client-Secret", clientSecret);
+    // 장소 목록 평점 높은 순으로 정렬
+    List<PlaceSearchResponseByGoogle.Result> results = Objects.requireNonNull(response.block()).getResults();
 
+    // 검색 결과 리스트를 평점에 따라 내림차순 정렬
+    List<PlaceSearchResponseByGoogle.Result> sortedResults = results.stream()
+        .sorted(Comparator.comparing(PlaceSearchResponseByGoogle.Result::getRating, Comparator.nullsLast(Double::compareTo)).reversed())
+        .collect(Collectors.toList());
 
-    return ResponseEntity.ok().body(get(apiURL,requestHeaders));
-  }
+    // 평점에 따라 정렬된 데이터에서 필요한 항목만 뽑아 새로운 response DTO에 매핑
+    List<PlaceSearchResponseSortedByRating> sortedResultsResponse = sortedResults.stream()
+        .map(result -> new PlaceSearchResponseSortedByRating(
+            result.getBusiness_status(), result.getGeometry(), result.getName(), result.getPlace_id(), result.getRating(), result.getVicinity()))
+        .collect(Collectors.toList());
 
-  private static String get(String apiUrl, Map<String, String> requestHeaders){
-    HttpURLConnection con = connect(apiUrl);
-    try {
-      con.setRequestMethod("GET");
-      for(Map.Entry<String, String> header :requestHeaders.entrySet()) {
-        con.setRequestProperty(header.getKey(), header.getValue());
-      }
-
-
-      int responseCode = con.getResponseCode();
-      if (responseCode == HttpURLConnection.HTTP_OK) { // 정상 호출
-        return readBody(con.getInputStream());
-      } else { // 오류 발생
-        return readBody(con.getErrorStream());
-      }
-    } catch (IOException e) {
-      throw new RuntimeException("API 요청과 응답 실패", e);
-    } finally {
-      con.disconnect();
-    }
-  }
-
-
-  private static HttpURLConnection connect(String apiUrl){
-    try {
-      URL url = new URL(apiUrl);
-      return (HttpURLConnection)url.openConnection();
-    } catch (MalformedURLException e) {
-      throw new RuntimeException("API URL이 잘못되었습니다. : " + apiUrl, e);
-    } catch (IOException e) {
-      throw new RuntimeException("연결이 실패했습니다. : " + apiUrl, e);
-    }
-  }
-
-
-  private static String readBody(InputStream body){
-    InputStreamReader streamReader = new InputStreamReader(body);
-
-
-    try (BufferedReader lineReader = new BufferedReader(streamReader)) {
-      StringBuilder responseBody = new StringBuilder();
-
-
-      String line;
-      while ((line = lineReader.readLine()) != null) {
-        responseBody.append(line);
-      }
-
-
-      return responseBody.toString();
-    } catch (IOException e) {
-      throw new RuntimeException("API 응답을 읽는 데 실패했습니다.", e);
-    }
+    return new PlaceSearchResponseByCustom<>(sortedResultsResponse.size(), sortedResultsResponse);
   }
 }
