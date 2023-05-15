@@ -7,6 +7,7 @@ const ChatForm = (props) => {
 
   const handleSubmit = () => {
     props.onSend(chatInputRef.current.value);
+    chatInputRef.current.value = "";
   };
 
   return (
