@@ -100,7 +100,7 @@ public class ChatController {
         }
 
         try {
-            chatMessage = extract(translate("ko", "ja", chatMessage));
+            chatMessage = extract(translate("ko", "en", chatMessage));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
