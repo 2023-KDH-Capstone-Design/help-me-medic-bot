@@ -1,15 +1,18 @@
 package com.example.messagingstompwebsocket.controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.http.*;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.RestTemplate;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -19,6 +22,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 @Controller
@@ -34,12 +39,17 @@ public class ChatController {
 
     @MessageMapping("/sendMessage")
     @SendTo("/topic/public")
-    public String sendMessage(@Payload String chatMessage) throws IOException
-    {
+    public String sendMessage(@Payload String chatMessage) throws IOException {
+
+        String translatedMessage1 = null;
+        try {
+            translatedMessage1 = extract(translate("en", "ko", chatMessage));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         URL url = new URL(apiUrl);
-
-        String message =  getReqMessage(chatMessage);
+        String message =  getReqMessage(translatedMessage1);
         String encodeBase64String = makeSignature(message, secretKey);
 
         //api서버 접속 (서버 -> 서버 통신)
@@ -88,6 +98,13 @@ public class ChatController {
         } else {  // 에러 발생
             chatMessage = con.getResponseMessage();
         }
+
+        try {
+            chatMessage = extract(translate("ko", "ja", chatMessage));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         return chatMessage;
     }
 
@@ -158,4 +175,45 @@ public class ChatController {
         return requestBody;
 
     }
+
+    // 번역
+    public String translate(String source, String target, String text) {
+
+        String clientId = "Client_id"; // Client ID 및 Client Secret은 자신의 인증 정보를 발급 후 수정
+        String clientSecret = "Secret_key";
+
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        headers.add("X-NCP-APIGW-API-KEY-ID", clientId);
+        headers.add("X-NCP-APIGW-API-KEY", clientSecret);
+
+        String encodedText = URLEncoder.encode(text, StandardCharsets.UTF_8);
+        String body = "source=" + source + "&target=" + target + "&text=" + encodedText;
+
+        HttpEntity<String> requestEntity = new HttpEntity<>(body, headers);
+        ResponseEntity<String> responseEntity = restTemplate.exchange(
+            "https://naveropenapi.apigw.ntruss.com/nmt/v1/translation",
+            HttpMethod.POST,
+            requestEntity,
+            String.class
+        );
+
+        if (responseEntity.getStatusCode() == HttpStatus.OK) {
+            return responseEntity.getBody();
+        } else {
+            return "Error occurred!";
+        }
+    }
+
+    // Json 응답으로부터 번역된 텍스트를 추출
+    public String extract(String message) throws Exception {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode rootNode = objectMapper.readTree(message);
+        JsonNode translatedTextNode = rootNode.path("message").path("result").path("translatedText");
+
+        return translatedTextNode.asText();
+    }
+
 }
