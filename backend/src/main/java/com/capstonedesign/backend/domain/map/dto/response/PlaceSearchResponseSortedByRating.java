@@ -18,6 +18,8 @@ public class PlaceSearchResponseSortedByRating {
 
   private Double rating;
 
+  private Integer user_ratings_total;
+
   private String vicinity;
 
 }
