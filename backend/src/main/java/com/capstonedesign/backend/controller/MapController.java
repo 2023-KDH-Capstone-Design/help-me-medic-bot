@@ -81,7 +81,7 @@ public class MapController {
     // 평점에 따라 정렬된 데이터에서 필요한 항목만 뽑아 새로운 response DTO에 매핑
     List<PlaceSearchResponseSortedByRating> sortedResultsResponse = sortedResults.stream()
         .map(result -> new PlaceSearchResponseSortedByRating(
-            result.getBusiness_status(), result.getGeometry(), result.getName(), result.getPlace_id(), result.getRating(), result.getVicinity()))
+            result.getBusiness_status(), result.getGeometry(), result.getName(), result.getPlace_id(), result.getRating(), result.getUser_ratings_total(), result.getVicinity()))
         .collect(Collectors.toList());
 
     return new PlaceSearchResponseByCustom<>(sortedResultsResponse.size(), sortedResultsResponse);
