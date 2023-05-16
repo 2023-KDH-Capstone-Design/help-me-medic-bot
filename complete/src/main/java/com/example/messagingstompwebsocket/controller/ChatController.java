@@ -179,8 +179,8 @@ public class ChatController {
     // 번역
     public String translate(String source, String target, String text) {
 
-        String clientId = "Client_id"; // Client ID 및 Client Secret은 자신의 인증 정보를 발급 후 수정
-        String clientSecret = "Secret_key";
+        String clientId = "umeasvtipu"; // Client ID 및 Client Secret은 자신의 인증 정보를 발급 후 수정
+        String clientSecret = "3USaPOeHpUIF215ySb8NqAEk1VKzIvWxVZoibNFt";
 
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
