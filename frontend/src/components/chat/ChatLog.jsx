@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 
 import ReqChatBubble from "./ReqChatBubble";
 import ResChatBubble from "./ResChatBubble";
-// import ModalToggle from "../modal/ModalToggle";
+import ModalToggle from "../modal/ModalToggle";
 import "../../styles/ChatLog.css";
 
 const ChatLog = (props) => {
@@ -21,11 +21,11 @@ const ChatLog = (props) => {
           return <ResChatBubble key={chat.id} message={chat.value} />;
         }
       })}
-      {/* <div className="flex flex-col items-start gap-1 ml-14">
+      <div className="flex flex-col items-start gap-1 ml-14">
         <ModalToggle label="서울 아산 병원" />
         <ModalToggle label="세브란스 병원" />
         <ModalToggle label="서울대 병원" />
-      </div>  */}
+      </div>
       <div ref={messageEndRef}></div>
     </main>
   );

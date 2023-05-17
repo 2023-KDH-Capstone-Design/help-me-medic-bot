@@ -1,11 +1,11 @@
 import React from "react";
+import ReactDOM from "react-dom";
 
 import NaverMap from "./NaverMap";
 
-const Modal = (props) => {
+const ModalOverlay = (props) => {
   const { label } = props;
   const id = `modal-${label.toLowerCase().replace(/\s+/g, "-")}`;
-
   return (
     <>
       <input type="checkbox" id={id} className="modal-toggle" />
@@ -23,6 +23,12 @@ const Modal = (props) => {
         </label>
       </label>
     </>
+  );
+};
+const Modal = (props) => {
+  return ReactDOM.createPortal(
+    <ModalOverlay label={props.label} />,
+    document.getElementById("overlay-root")
   );
 };
 
