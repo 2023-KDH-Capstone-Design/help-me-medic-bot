@@ -3,12 +3,10 @@
 ## 프론트엔드 디렉토리 구조
 
 - frontend/public
-
   - 공통적으로 사용되는 요소, 설정 (favicon, logo, app title 등)
   - api import (index.html)
 
 - frontend/src
-
   - /assets
     - /images
       - 프로필 이미지 (서버 처리로 수정, 삭제 예정)
@@ -36,7 +34,6 @@
 ## 백엔드 디렉토리 구조
 
 - backend/controller
-
   - REST API 요청 및 응답을 처리하는 Controller
 
 - backend/domain
