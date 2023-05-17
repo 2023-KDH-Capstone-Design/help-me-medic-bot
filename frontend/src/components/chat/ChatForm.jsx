@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import * as SockJS from "sockjs-client";
 import * as StompJs from "@stomp/stompjs";
 
 import { BsSend } from "react-icons/bs";
 
 const ChatForm = (props) => {
+  const { t } = useTranslation();
   const [isConnected, setIsConnected] = useState(false);
   const stompClient = useRef();
   const chatInputRef = useRef();
@@ -41,9 +43,7 @@ const ChatForm = (props) => {
         <div className="input-group">
           <input
             type="text"
-            placeholder={
-              isConnected ? "Type here" : "Cannot connect to server."
-            }
+            placeholder={isConnected ? t("chatph1") : t("chatph2")}
             className="input input-bordered w-full"
             ref={chatInputRef}
             disabled={!isConnected}

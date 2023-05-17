@@ -1,10 +1,13 @@
 import React from "react";
-import Profile from "./Profile";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
+import Profile from "./Profile";
 import { BsChatDots, BsPeople } from "react-icons/bs";
 
 const Drawer = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="drawer-side">
       <label htmlFor="drawer" className="drawer-overlay"></label>
@@ -24,7 +27,7 @@ const Drawer = () => {
               <span className="flex-none">
                 <BsChatDots size="24px" />
               </span>
-              <span className="flex-1">Chat</span>
+              <span className="flex-1">{t("chat")}</span>
             </Link>
           </li>
           <li>
@@ -32,7 +35,7 @@ const Drawer = () => {
               <span className="flex-none">
                 <BsPeople size="24px" />
               </span>
-              <span className="flex-1">Forum</span>
+              <span className="flex-1">{t("forum")}</span>
             </Link>
           </li>
         </ul>

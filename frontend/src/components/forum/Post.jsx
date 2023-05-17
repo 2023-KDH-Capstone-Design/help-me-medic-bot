@@ -1,10 +1,13 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import profileImage from "../../assets/images/dog.jpg";
 import { IoSend } from "react-icons/io5";
 import Comment from "./Comment";
 
 const Post = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="card w-full bg-base-100 shadow-xl">
       <div className="card-body">
@@ -21,7 +24,7 @@ const Post = () => {
           <div className="input-group">
             <input
               type="text"
-              placeholder="Comment"
+              placeholder={t("comment")}
               className="input input-bordered w-full"
             />
             <button className="btn btn-square">

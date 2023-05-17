@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, Routes, Route } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import Home from "./Home";
 import Chat from "./Chat";
@@ -9,15 +10,16 @@ import Advertisement from "../components/ui/ads/Advertisement";
 import Drawer from "../components/ui/drawer/Drawer";
 import Modal from "../components/modal/Modal";
 
-const pages = [
-  { id: 0, path: "/", title: "Home", comp: <Home /> },
-  { id: 1, path: "/chat", title: "Chat", comp: <Chat /> },
-  { id: 2, path: "/forum", title: "Forum", comp: <Forum /> },
-];
-
 const Main = () => {
+  const { t } = useTranslation();
   const { pathname } = useLocation();
   const [title, setTitle] = useState();
+
+  const pages = [
+    { id: 0, path: "/", title: t("home"), comp: <Home /> },
+    { id: 1, path: "/chat", title: t("chat"), comp: <Chat /> },
+    { id: 2, path: "/forum", title: t("forum"), comp: <Forum /> },
+  ];
 
   useEffect(() => {
     const { title: subTitle } = pages.find((p) => p.path === pathname);

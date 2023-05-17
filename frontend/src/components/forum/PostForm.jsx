@@ -1,6 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const PostForm = () => {
+  const { t } = useTranslation();
+
   const handleSubmit = () => {
     alert("test");
   };
@@ -10,11 +13,11 @@ const PostForm = () => {
       <div className="card-body">
         <textarea
           className="textarea textarea-lg textarea-bordered"
-          placeholder="What's on your mind?"
+          placeholder={t("content")}
         />
         <div className="card-actions justify-end">
           <button type="submit" className="btn btn-primary w-full">
-            Post
+            {t("post")}
           </button>
         </div>
       </div>

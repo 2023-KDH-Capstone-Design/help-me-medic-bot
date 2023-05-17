@@ -1,4 +1,5 @@
 import React from "react";
+import i18n from "../../../config/lang/i18n";
 
 import { FaGlobe } from "react-icons/fa";
 
@@ -11,7 +12,7 @@ const LanguageButton = () => {
       <div className="dropdown-content bg-base-200 rounded-t-box rounded-b-box top-px mt-16 w-56 overflow-y-auto shadow-2xl">
         <ul className="menu menu-compact gap-1 p-3" tabIndex="0">
           <li>
-            <button className="flex">
+            <button className="flex" onClick={() => i18n.changeLanguage("en")}>
               <img
                 loading="lazy"
                 width="20"
@@ -23,7 +24,7 @@ const LanguageButton = () => {
             </button>
           </li>
           <li>
-            <button className="flex">
+            <button className="flex" onClick={() => i18n.changeLanguage("es")}>
               <img
                 loading="lazy"
                 width="20"
@@ -35,7 +36,7 @@ const LanguageButton = () => {
             </button>
           </li>
           <li>
-            <button className="flex">
+            <button className="flex" onClick={() => i18n.changeLanguage("fr")}>
               <img
                 loading="lazy"
                 width="20"
@@ -47,7 +48,7 @@ const LanguageButton = () => {
             </button>
           </li>
           <li>
-            <button className="flex">
+            <button className="flex" onClick={() => i18n.changeLanguage("id")}>
               <img
                 loading="lazy"
                 width="20"
@@ -59,7 +60,7 @@ const LanguageButton = () => {
             </button>
           </li>
           <li>
-            <button className="flex">
+            <button className="flex" onClick={() => i18n.changeLanguage("jp")}>
               <img
                 loading="lazy"
                 width="20"
@@ -71,7 +72,7 @@ const LanguageButton = () => {
             </button>
           </li>
           <li>
-            <button className="flex">
+            <button className="flex" onClick={() => i18n.changeLanguage("ko")}>
               <img
                 loading="lazy"
                 width="20"
@@ -83,7 +84,7 @@ const LanguageButton = () => {
             </button>
           </li>
           <li>
-            <button className="flex">
+            <button className="flex" onClick={() => i18n.changeLanguage("pt")}>
               <img
                 loading="lazy"
                 width="20"
@@ -95,7 +96,7 @@ const LanguageButton = () => {
             </button>
           </li>
           <li>
-            <button className="flex">
+            <button className="flex" onClick={() => i18n.changeLanguage("ru")}>
               <img
                 loading="lazy"
                 width="20"
@@ -107,7 +108,10 @@ const LanguageButton = () => {
             </button>
           </li>
           <li>
-            <button className="flex">
+            <button
+              className="flex"
+              onClick={() => i18n.changeLanguage("zh-cn")}
+            >
               <img
                 loading="lazy"
                 width="20"
@@ -119,7 +123,10 @@ const LanguageButton = () => {
             </button>
           </li>
           <li>
-            <button className="flex">
+            <button
+              className="flex"
+              onClick={() => i18n.changeLanguage("zh-tw")}
+            >
               <img
                 loading="lazy"
                 width="20"
