@@ -1,5 +1,20 @@
 # Help me! Medic bot!
 
+## 백엔드 디렉토리 구조
+
+- backend/controller
+  - REST API 요청 및 응답을 처리하는 Controller
+
+- backend/domain
+  - /comment
+    - 댓글 관련 엔티티 및 서비스
+  - /login
+    - 로그인 관련 서비스
+  - /member
+    - 회원 관련 엔티티 및 서비스
+  - /post
+    - 게시글 관련 엔티티 및 서비스
+
 ## 프론트엔드 디렉토리 구조
 
 - frontend/public
@@ -30,18 +45,3 @@
     - tailwind 설정과 기타 커스텀 스타일 시트
   - /setupProxy.js
     - Cross Origin 오류 방지를 위한 proxy 설정 (API 접근 시 사용)
-
-## 백엔드 디렉토리 구조
-
-- backend/controller
-  - REST API 요청 및 응답을 처리하는 Controller
-
-- backend/domain
-  - /comment
-    - 댓글 관련 엔티티 및 서비스
-  - /login
-    - 로그인 관련 서비스
-  - /member
-    - 회원 관련 엔티티 및 서비스
-  - /post
-    - 게시글 관련 엔티티 및 서비스
