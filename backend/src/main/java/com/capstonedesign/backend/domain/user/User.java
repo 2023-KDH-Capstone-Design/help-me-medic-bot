@@ -22,7 +22,9 @@ public class User {
 
   private String name;
 
-  private int age;
+  private String nickname;
+
+  private String country;
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Post> posts;
