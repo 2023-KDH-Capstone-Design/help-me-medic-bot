@@ -1,4 +1,4 @@
-package com.example.messagingstompwebsocket;
+package com.capstonedesign.backend.domain.chat;
 
 public class HelloMessage {
 

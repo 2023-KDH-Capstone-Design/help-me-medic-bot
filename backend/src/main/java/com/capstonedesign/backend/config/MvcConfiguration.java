@@ -1,4 +1,4 @@
-package com.example.messagingstompwebsocket.config;
+package com.capstonedesign.backend.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.CacheControl;
