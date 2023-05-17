@@ -110,7 +110,7 @@ const LanguageButton = () => {
           <li>
             <button
               className="flex"
-              onClick={() => i18n.changeLanguage("zh-cn")}
+              onClick={() => i18n.changeLanguage("zhCn")}
             >
               <img
                 loading="lazy"
@@ -125,7 +125,7 @@ const LanguageButton = () => {
           <li>
             <button
               className="flex"
-              onClick={() => i18n.changeLanguage("zh-tw")}
+              onClick={() => i18n.changeLanguage("zhTw")}
             >
               <img
                 loading="lazy"

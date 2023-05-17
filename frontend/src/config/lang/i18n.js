@@ -37,10 +37,10 @@ const resource = {
   ru: {
     translation: translationRu,
   },
-  "zh-cn": {
+  zhCn: {
     translation: translationZhCn,
   },
-  "zh-tw": {
+  zhTw: {
     translation: translationZhTw,
   },
 };
