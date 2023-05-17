@@ -1,12 +1,34 @@
-import React, { useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import * as SockJS from "sockjs-client";
+import * as StompJs from "@stomp/stompjs";
 
 import { BsSend } from "react-icons/bs";
 
 const ChatForm = (props) => {
+  const [isConnected, setIsConnected] = useState(false);
+  const stompClient = useRef();
   const chatInputRef = useRef();
 
-  const handleSubmit = () => {
-    props.onSend(chatInputRef.current.value);
+  useEffect(() => {
+    const socket = new SockJS("http://localhost:8080/ws");
+
+    stompClient.current = StompJs.Stomp.over(socket);
+    stompClient.current.connect({}, () => {
+      setIsConnected(true);
+      stompClient.current.subscribe("/topic/public", (message) => {
+        props.onUpdate("res", message.body);
+      });
+    });
+  }, []);
+
+  const sendMessage = (message) => {
+    stompClient.current.send("/app/sendMessage", {}, JSON.stringify(message));
+    props.onUpdate("req", message);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    sendMessage(chatInputRef.current.value);
     chatInputRef.current.value = "";
   };
 
@@ -19,11 +41,14 @@ const ChatForm = (props) => {
         <div className="input-group">
           <input
             type="text"
-            placeholder="Type here"
+            placeholder={
+              isConnected ? "Type here" : "Cannot connect to server."
+            }
             className="input input-bordered w-full"
             ref={chatInputRef}
+            disabled={!isConnected}
           />
-          <button type="submit" className="btn">
+          <button type="submit" className="btn" disabled={!isConnected}>
             <BsSend size="16px" />
           </button>
         </div>
