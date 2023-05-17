@@ -1,4 +1,4 @@
-package com.capstonedesign.backend.domain.member;
+package com.capstonedesign.backend.domain.user;
 
 import com.capstonedesign.backend.domain.post.Post;
 import javax.persistence.*;
@@ -8,12 +8,12 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "members")
+@Table(name = "users")
 @Getter @Setter
-public class Member {
+public class User {
 
   @Id @GeneratedValue
-  @Column(name = "member_id")
+  @Column(name = "user_id")
   private Long id;
 
   private String loginId;
@@ -24,7 +24,7 @@ public class Member {
 
   private int age;
 
-  @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Post> posts;
 
 //  @OneToMany(mappedBy = "member")

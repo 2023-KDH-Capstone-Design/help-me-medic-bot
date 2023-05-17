@@ -1,11 +1,11 @@
-package com.capstonedesign.backend.domain.member.service.dto.response;
+package com.capstonedesign.backend.domain.user.service.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class JoinMemberResponseDTO {
+public class JoinUserResponseDTO {
 
   private Long id;
 

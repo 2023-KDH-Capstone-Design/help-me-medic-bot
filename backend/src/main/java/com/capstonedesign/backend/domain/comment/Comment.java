@@ -1,6 +1,6 @@
 package com.capstonedesign.backend.domain.comment;
 
-import com.capstonedesign.backend.domain.member.Member;
+import com.capstonedesign.backend.domain.user.User;
 import com.capstonedesign.backend.domain.post.Post;
 import javax.persistence.*;
 import lombok.Getter;
@@ -17,7 +17,7 @@ public class Comment {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "member_id")
-  private Member member;
+  private User user;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "post_id")
