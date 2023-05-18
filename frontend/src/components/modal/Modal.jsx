@@ -4,8 +4,8 @@ import ReactDOM from "react-dom";
 import NaverMap from "./NaverMap";
 
 const ModalOverlay = (props) => {
-  const { label } = props;
-  const id = `modal-${label.toLowerCase().replace(/\s+/g, "-")}`;
+  const { label, id } = props;
+
   return (
     <>
       <input type="checkbox" id={id} className="modal-toggle" />
@@ -25,10 +25,21 @@ const ModalOverlay = (props) => {
     </>
   );
 };
+
 const Modal = (props) => {
-  return ReactDOM.createPortal(
-    <ModalOverlay label={props.label} />,
-    document.getElementById("overlay-root")
+  const { label } = props;
+  const id = `modal-${label.toLowerCase().replace(/\s+/g, "-")}`;
+
+  return (
+    <>
+      <label htmlFor={id} className="btn btn-outline btn-primary rounded-xl">
+        {label}
+      </label>
+      {ReactDOM.createPortal(
+        <ModalOverlay label={label} id={id} />,
+        document.getElementById("overlay-root")
+      )}
+    </>
   );
 };
 

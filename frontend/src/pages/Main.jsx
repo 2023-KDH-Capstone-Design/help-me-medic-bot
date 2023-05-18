@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { useLocation, Routes, Route } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -8,23 +8,25 @@ import Forum from "./Forum";
 import AppBar from "../components/ui/navbar/AppBar";
 import Advertisement from "../components/ui/ads/Advertisement";
 import Drawer from "../components/ui/drawer/Drawer";
-import Modal from "../components/modal/Modal";
 
 const Main = () => {
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const [title, setTitle] = useState();
 
-  const pages = [
-    { id: 0, path: "/", title: t("home"), comp: <Home /> },
-    { id: 1, path: "/chat", title: t("chat"), comp: <Chat /> },
-    { id: 2, path: "/forum", title: t("forum"), comp: <Forum /> },
-  ];
+  const pages = useMemo(
+    () => [
+      { id: 0, path: "/", title: t("home"), comp: <Home /> },
+      { id: 1, path: "/chat", title: t("chat"), comp: <Chat /> },
+      { id: 2, path: "/forum", title: t("forum"), comp: <Forum /> },
+    ],
+    [t]
+  );
 
   useEffect(() => {
     const { title: subTitle } = pages.find((p) => p.path === pathname);
     setTitle(subTitle);
-  }, [pathname]);
+  }, [pathname, pages]);
 
   return (
     <div className="bg-base-300 drawer drawer-mobile">
@@ -51,9 +53,6 @@ const Main = () => {
         </div>
       </div>
       <Drawer />
-      <Modal label="서울 아산 병원" />
-      <Modal label="세브란스 병원" />
-      <Modal label="서울대 병원" />
     </div>
   );
 };
