@@ -14,7 +14,7 @@ const Chat = () => {
   };
 
   return (
-    <section className="msger w-full mx-auto flex flex-col gap-8">
+    <section className="msger w-full max-w-3xl mx-auto flex flex-col gap-8">
       <ChatLog log={chatLog} />
       <ChatForm onUpdate={handleUpdate} />
     </section>
