@@ -28,8 +28,8 @@ public class PostService {
     return postRepository.findById(id);
   }
 
-  public List<Post> findByMemberId(Long memberId) {
-    return postRepository.findByMemberId(memberId);
+  public List<Post> findByUserId(Long userId) {
+    return postRepository.findByUserId(userId);
   }
 
   public List<Post> findAll() {
@@ -37,7 +37,7 @@ public class PostService {
   }
 
   @Transactional
-  public void updatePost(Long id, UpdatePostRequestDTO updatePostRequestDTO) {
+  public void update(Long id, UpdatePostRequestDTO updatePostRequestDTO) {
     Post findPost = findById(id);
 
     if (findPost!= null) {
@@ -48,8 +48,8 @@ public class PostService {
   }
 
   @Transactional
-  public void deleteById(Long id) {
-    postRepository.deleteById(id);
+  public void delete(Long id) {
+    postRepository.delete(id);
   }
 
 

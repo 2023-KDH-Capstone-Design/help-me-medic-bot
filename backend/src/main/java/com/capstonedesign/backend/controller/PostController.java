@@ -1,8 +1,8 @@
 package com.capstonedesign.backend.controller;
 
 
-import com.capstonedesign.backend.domain.member.Member;
-import com.capstonedesign.backend.domain.member.service.MemberService;
+import com.capstonedesign.backend.domain.user.User;
+import com.capstonedesign.backend.domain.user.service.UserService;
 import com.capstonedesign.backend.domain.post.Post;
 import com.capstonedesign.backend.domain.post.service.PostService;
 import com.capstonedesign.backend.domain.post.service.dto.request.CreatePostRequestDTO;
@@ -11,6 +11,7 @@ import com.capstonedesign.backend.domain.post.service.dto.response.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,20 +23,20 @@ import java.util.stream.Collectors;
 public class PostController {
 
   private final PostService postService;
-  private final MemberService memberService;
+  private final UserService userService;
 
   /**
    * 게시글 작성
    */
   @PostMapping("/post/create")
   @ApiOperation(value = "게시글 작성 API", notes = "제목 및 내용을 요청 파라미터로 하여 게시글 작성")
-  public CreatePostResponseDTO registerPost(@RequestBody CreatePostRequestDTO createPostRequestDTO) {
+  public ResponseEntity<Long> registerPost(@RequestBody CreatePostRequestDTO createPostRequestDTO) {
 
-    Member findMember = memberService.findByName(createPostRequestDTO.getAuthor());
-    Post post = Post.createPost(findMember, createPostRequestDTO.getTitle(), createPostRequestDTO.getContent());
+    User findUser = userService.findByName(createPostRequestDTO.getAuthor());
+    Post post = Post.createPost(findUser, createPostRequestDTO.getTitle(), createPostRequestDTO.getContent());
     Long postId = postService.save(post);
 
-    return new CreatePostResponseDTO(postId);
+    return ResponseEntity.ok(postId);
 
   }
 
@@ -48,7 +49,7 @@ public class PostController {
 
     List<Post> posts = postService.findAll();
     List<DetailPostResponseDTO> collect = posts.stream().map(p ->
-        new DetailPostResponseDTO(p.getId(), p.getMember().getName(), p.getTitle(), p.getContent(),
+        new DetailPostResponseDTO(p.getId(), p.getUser().getName(), p.getTitle(), p.getContent(),
             p.getCreatedAt(), p.getUpdatedAt())).collect(Collectors.toList());
 
     return new ListPostResponse<>(collect.size(), collect);
@@ -64,7 +65,7 @@ public class PostController {
 
     Post findPost = postService.findById(postId);
 
-    return new DetailPostResponseDTO(findPost.getId(), findPost.getMember().getName(), findPost.getTitle(),
+    return new DetailPostResponseDTO(findPost.getId(), findPost.getUser().getName(), findPost.getTitle(),
         findPost.getContent(), findPost.getCreatedAt(), findPost.getUpdatedAt());
   }
 
@@ -73,13 +74,12 @@ public class PostController {
    */
   @PatchMapping("/post/update/{postId}")
   @ApiOperation(value = "게시글 수정 API", notes = "요청받은 게시글 정보 수정값에 따라 작성")
-  public UpdatePostResponseDTO updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequestDTO updatePostRequestDTO) {
+  public ResponseEntity<Long> updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequestDTO updatePostRequestDTO) {
 
-    postService.updatePost(postId, updatePostRequestDTO);
+    postService.update(postId, updatePostRequestDTO);
     Post findPost = postService.findById(postId);
 
-    return new UpdatePostResponseDTO(findPost.getId(), findPost.getMember().getName(),
-        findPost.getTitle(), findPost.getContent(), findPost.getCreatedAt(), findPost.getUpdatedAt());
+    return ResponseEntity.ok(findPost.getId());
   }
 
   /**
@@ -87,10 +87,10 @@ public class PostController {
    */
   @DeleteMapping("/post/delete/{postId}")
   @ApiOperation(value = "게시글 삭제 API", notes = "특정 게시글 삭제")
-  public DeletePostResponseDTO deletePost(@PathVariable Long postId) {
+  public ResponseEntity<Object> deletePost(@PathVariable Long postId) {
 
-    postService.deleteById(postId);
+    postService.delete(postId);
 
-    return new DeletePostResponseDTO(postId);
+    return ResponseEntity.noContent().build();
   }
 }
