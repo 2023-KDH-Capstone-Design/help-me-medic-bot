@@ -10,18 +10,39 @@
 
 ## 백엔드 디렉토리 구조
 
+- backend/config
+  - 설정 파일
+
 - backend/controller
   - REST API 요청 및 응답을 처리하는 Controller
+  - /chatController
+    - 클로바 챗봇 호출
+  - /LoginController
+    - 로그인 처리
+  - /MapController
+    - 주변 지역 및 장소 검색
+  - /PostController
+    - 게시글 작성, 수정 및 삭제
+  - /TranslateController
+    - 번역 처리
+  - /UserController
+    - 회원가입 및 회원 조회
 
 - backend/domain
+  - /chat
+    - 챗봇 관련 서비스
   - /comment
     - 댓글 관련 엔티티 및 서비스
   - /login
     - 로그인 관련 서비스
-  - /member
-    - 회원 관련 엔티티 및 서비스
+  - /map
+    - 지도 관련 서비스
   - /post
     - 게시글 관련 엔티티 및 서비스
+  - /translate
+    - 번역 관련 서비스
+  - /user
+    - 회원 관련 엔티티 및 서비스
 
 &nbsp;  
 
