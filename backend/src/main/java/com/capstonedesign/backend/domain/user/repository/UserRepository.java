@@ -14,7 +14,9 @@ public interface UserRepository {
 
   User findByName(String name);
 
+  User findByNickname(String nickname);
+
   List<User> findAll();
 
-  void deleteById(Long id);
+  void delete(Long id);
 }

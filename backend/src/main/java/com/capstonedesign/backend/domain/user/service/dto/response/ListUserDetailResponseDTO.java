@@ -6,7 +6,14 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class ListUserDetailResponseDTO {
+
   private Long id;
+
+  private String loginId;
+
   private String name;
-  private int age;
+
+  private String nickname;
+
+  private String country;
 }
