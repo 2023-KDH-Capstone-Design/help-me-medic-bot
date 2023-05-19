@@ -8,8 +8,14 @@ import lombok.Getter;
 public class LoginResponseDTO {
 
   private Long id;
+
   private String loginId;
+
   private String password;
+
   private String name;
-  private int age;
+
+  private String nickname;
+
+  private String country;
 }

@@ -8,7 +8,12 @@ import lombok.Getter;
 public class DetailSessionResponseDTO {
 
   private Long id;
+
   private String loginId;
+
   private String name;
-  private int age;
+
+  private String nickname;
+
+  private String country;
 }
