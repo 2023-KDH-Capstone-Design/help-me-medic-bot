@@ -6,7 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
- @Service
+import java.util.NoSuchElementException;
+
+@Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class LoginService {
@@ -16,8 +18,11 @@ public class LoginService {
   public User login(String username, String password) {
 
     User findUser = userRepository.findByLoginId(username);
-    if (!isCorrectPassword(password, findUser)) {
-      return null;
+
+    if (findUser == null) {
+      throw new NoSuchElementException("사용자가 존재하지 않습니다.");
+    } else if (!isCorrectPassword(password, findUser)) {
+      throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
     }
 
     return findUser;
