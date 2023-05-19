@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 @RestController
@@ -36,15 +37,11 @@ public class LoginController {
     User loginUser = loginService.login(loginRequestDTO.getLoginId(), loginRequestDTO.getPassword());
     log.info("login: {}", loginUser);
 
-    if (loginUser == null) {
-      log.error("login failed");
-      return new LoginResponseDTO(-1L, "null", "null", "null", -1);
-    }
-
     HttpSession session = request.getSession();
     session.setAttribute(SessionConstConfig.SESSION_KEY, loginUser);
 
-    return new LoginResponseDTO(loginUser.getId(), loginUser.getLoginId(), loginUser.getPassword(), loginUser.getName(), loginUser.getAge());
+    return new LoginResponseDTO(loginUser.getId(), loginUser.getLoginId(),
+        loginUser.getPassword(), loginUser.getName(), loginUser.getNickname(), loginUser.getCountry());
   }
 
   @PostMapping("/logout")
@@ -67,9 +64,10 @@ public class LoginController {
 
     if (!Objects.isNull(session) && !Objects.isNull(session.getAttribute(SessionConstConfig.SESSION_KEY))) {
       User loginUser = (User) session.getAttribute(SessionConstConfig.SESSION_KEY);
-      return new DetailSessionResponseDTO(loginUser.getId(), loginUser.getLoginId(), loginUser.getName(), loginUser.getAge());
+      return new DetailSessionResponseDTO(loginUser.getId(), loginUser.getLoginId(),
+          loginUser.getName(), loginUser.getNickname(), loginUser.getCountry());
     } else {
-      return new DetailSessionResponseDTO(-1L, "", "", -1);
+      throw new NoSuchElementException("세션이 존재하지 않습니다.");
     }
   }
 }
