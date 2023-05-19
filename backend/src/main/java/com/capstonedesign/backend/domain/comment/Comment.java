@@ -14,6 +14,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "comments")
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment {
@@ -31,14 +32,14 @@ public class Comment {
   private LocalDateTime updatedAt;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "member_id")
+  @JoinColumn(name = "user_id")
   private User user;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "post_id")
   private Post post;
 
-  public static Post createComment(User user, Post post, String content) {
+  public static Comment createComment(User user, Post post, String content) {
 
     Comment comment = new Comment();
 
@@ -48,6 +49,6 @@ public class Comment {
     comment.setCreatedAt(LocalDateTime.now());
     comment.setUpdatedAt(LocalDateTime.now());
 
-    return post;
+    return comment;
   }
 }
