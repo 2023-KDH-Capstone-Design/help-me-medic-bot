@@ -42,7 +42,7 @@ public class PostRepositoryImpl implements PostRepository {
 
 
   @Override
-  public void deleteById(Long id) {
+  public void delete(Long id) {
 
     Post findPost = em.find(Post.class, id);
 

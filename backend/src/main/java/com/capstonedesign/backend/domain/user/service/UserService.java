@@ -1,7 +1,7 @@
 package com.capstonedesign.backend.domain.user.service;
 
 import com.capstonedesign.backend.domain.user.User;
-import com.capstonedesign.backend.domain.user.repository.UserRepositoryImpl;
+import com.capstonedesign.backend.domain.user.repository.UserRepository;
 import com.capstonedesign.backend.domain.user.service.dto.request.UpdateUserRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,11 +14,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
 
-  private final UserRepositoryImpl memberRepository;
+  private final UserRepository userRepository;
 
   @Transactional
   public Long join(User user) {
-    memberRepository.save(user);
+    userRepository.save(user);
 
     return user.getId();
   }
@@ -26,32 +26,38 @@ public class UserService {
 
   public User findById(Long id) {
 
-    return memberRepository.findById(id);
+    return userRepository.findById(id);
   }
 
   public User findByName(String name) {
 
-    return memberRepository.findByName(name);
+    return userRepository.findByName(name);
+  }
+
+  public User findByNickname(String nickname) {
+
+    return userRepository.findByNickname(nickname);
   }
 
   public List<User> findAll() {
 
-    return memberRepository.findAll();
+    return userRepository.findAll();
   }
 
   @Transactional
-  public void updateMember(Long id, UpdateUserRequestDTO updateUserRequestDTO) {
-    User findUser = memberRepository.findById(id);
+  public void update(Long id, UpdateUserRequestDTO updateUserRequestDTO) {
+    User findUser = userRepository.findById(id);
 
     if (findUser != null) {
       findUser.setName(updateUserRequestDTO.getName());
-      findUser.setAge(updateUserRequestDTO.getAge());
+      findUser.setNickname(updateUserRequestDTO.getNickname());
+      findUser.setCountry(updateUserRequestDTO.getCountry());
     }
   }
 
   @Transactional
-  public void deleteById(Long id) {
-    memberRepository.deleteById(id);
+  public void delete(Long id) {
+    userRepository.delete(id);
   }
 
 }
