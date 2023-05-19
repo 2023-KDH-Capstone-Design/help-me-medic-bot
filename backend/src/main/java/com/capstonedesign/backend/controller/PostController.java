@@ -76,7 +76,7 @@ public class PostController {
   @ApiOperation(value = "게시글 수정 API", notes = "요청받은 게시글 정보 수정값에 따라 작성")
   public ResponseEntity<Long> updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequestDTO updatePostRequestDTO) {
 
-    postService.updatePost(postId, updatePostRequestDTO);
+    postService.update(postId, updatePostRequestDTO);
     Post findPost = postService.findById(postId);
 
     return ResponseEntity.ok(findPost.getId());
@@ -89,7 +89,7 @@ public class PostController {
   @ApiOperation(value = "게시글 삭제 API", notes = "특정 게시글 삭제")
   public ResponseEntity<Object> deletePost(@PathVariable Long postId) {
 
-    postService.deleteById(postId);
+    postService.delete(postId);
 
     return ResponseEntity.noContent().build();
   }
