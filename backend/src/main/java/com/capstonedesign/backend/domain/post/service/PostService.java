@@ -28,8 +28,8 @@ public class PostService {
     return postRepository.findById(id);
   }
 
-  public List<Post> findByMemberId(Long memberId) {
-    return postRepository.findByMemberId(memberId);
+  public List<Post> findByUserId(Long userId) {
+    return postRepository.findByUserId(userId);
   }
 
   public List<Post> findAll() {
