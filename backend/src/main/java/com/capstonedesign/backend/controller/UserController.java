@@ -32,7 +32,8 @@ public class UserController {
     user.setLoginId(joinUserRequestDTO.getLoginId());
     user.setPassword(joinUserRequestDTO.getPassword());
     user.setName(joinUserRequestDTO.getName());
-    user.setAge(joinUserRequestDTO.getAge());
+    user.setNickname(joinUserRequestDTO.getNickname());
+    user.setCountry(joinUserRequestDTO.getCountry());
     Long joinId = userService.join(user);
 
     return new JoinUserResponseDTO(joinId);
@@ -46,7 +47,7 @@ public class UserController {
   public ListUserResponse<List<ListUserDetailResponseDTO>> listUser() {
 
     List<User> userList = userService.findAll();
-    List<ListUserDetailResponseDTO> listMemberData = userList.stream().map(m -> new ListUserDetailResponseDTO(m.getId(), m.getName(), m.getAge()))
+    List<ListUserDetailResponseDTO> listMemberData = userList.stream().map(m -> new ListUserDetailResponseDTO(m.getId(), m.getLoginId(), m.getName(), m.getNickname(), m.getCountry()))
         .collect(Collectors.toList());
 
     return new ListUserResponse<>(listMemberData.size(), listMemberData);
@@ -61,7 +62,7 @@ public class UserController {
 
     User findUser = userService.findById(memberId);
 
-    return new ListUserDetailResponseDTO(findUser.getId(), findUser.getName(), findUser.getAge());
+    return new ListUserDetailResponseDTO(findUser.getId(), findUser.getLoginId(), findUser.getName(), findUser.getNickname(), findUser.getCountry());
   }
 
   /**
@@ -71,7 +72,7 @@ public class UserController {
   @ApiOperation(value = "회원 수정 API", notes = "요청받은 회원 정보 수정값에 따라 회원 수정")
   public ResponseEntity<Long> updateUser(@PathVariable Long memberId, @RequestBody UpdateUserRequestDTO updateUserRequestDTO) {
 
-    userService.updateMember(memberId, updateUserRequestDTO);
+    userService.update(memberId, updateUserRequestDTO);
     User findUser = userService.findById(memberId);
 
     return ResponseEntity.ok(findUser.getId());
@@ -84,7 +85,7 @@ public class UserController {
   @ApiOperation(value = "회원 삭제 API", notes = "특정 회원의 가입 정보를 삭제")
   public ResponseEntity<Object> deleteUser(@PathVariable Long memberId) {
 
-    userService.deleteById(memberId);
+    userService.delete(memberId);
 
     return ResponseEntity.noContent().build();
   }

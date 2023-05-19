@@ -7,6 +7,8 @@ import lombok.Getter;
 public class UpdateUserRequestDTO {
 
   private String name;
-  private int age;
 
+  private String nickname;
+
+  private String country;
 }
