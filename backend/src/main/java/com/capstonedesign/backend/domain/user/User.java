@@ -28,4 +28,16 @@ public class User {
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Post> posts;
+
+  public static User createUser(String loginId, String password, String name, String nickname, String country) {
+
+    User user = new User();
+    user.setLoginId(loginId);
+    user.setPassword(password);
+    user.setName(name);
+    user.setNickname(nickname);
+    user.setCountry(country);
+
+    return user;
+  }
 }
