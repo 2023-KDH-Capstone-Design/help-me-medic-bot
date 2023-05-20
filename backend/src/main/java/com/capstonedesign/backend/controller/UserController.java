@@ -24,7 +24,7 @@ public class UserController {
   /**
    * 회원 가입
    */
-  @PostMapping("/member/join")
+  @PostMapping("/user/join")
   @ApiOperation(value = "회원가입 API", notes = "회원 정보를 요청값으로 받아 회원가입 진행")
   public JoinUserResponseDTO joinUser(@RequestBody JoinUserRequestDTO joinUserRequestDTO) {
 
@@ -42,7 +42,7 @@ public class UserController {
   /**
    * 회원 조회
    */
-  @GetMapping("/member/list")
+  @GetMapping("/user/list")
   @ApiOperation(value = "전체 회원 목록 조회 API", notes = "회원가입된 모든 회원 목록 조회")
   public ListUserResponse<List<ListUserDetailResponseDTO>> listUser() {
 
@@ -56,11 +56,11 @@ public class UserController {
   /**
    * 회원 상세 조회
    */
-  @GetMapping("/member/list/{memberId}")
+  @GetMapping("/user/list/{userId}")
   @ApiOperation(value = "회원 상세 조회 API", notes = "특정 회원 상세 정보 조회")
-  public ListUserDetailResponseDTO listUserDetail(@PathVariable Long memberId) {
+  public ListUserDetailResponseDTO listUserDetail(@PathVariable Long userId) {
 
-    User findUser = userService.findById(memberId);
+    User findUser = userService.findById(userId);
 
     return new ListUserDetailResponseDTO(findUser.getId(), findUser.getLoginId(), findUser.getName(), findUser.getNickname(), findUser.getCountry());
   }
@@ -68,12 +68,12 @@ public class UserController {
   /**
    * 회원 수정
    */
-  @PatchMapping("/member/update/{memberId}")
+  @PatchMapping("/user/update/{userId}")
   @ApiOperation(value = "회원 수정 API", notes = "요청받은 회원 정보 수정값에 따라 회원 수정")
-  public ResponseEntity<Long> updateUser(@PathVariable Long memberId, @RequestBody UpdateUserRequestDTO updateUserRequestDTO) {
+  public ResponseEntity<Long> updateUser(@PathVariable Long userId, @RequestBody UpdateUserRequestDTO updateUserRequestDTO) {
 
-    userService.update(memberId, updateUserRequestDTO);
-    User findUser = userService.findById(memberId);
+    userService.update(userId, updateUserRequestDTO);
+    User findUser = userService.findById(userId);
 
     return ResponseEntity.ok(findUser.getId());
   }
@@ -81,11 +81,11 @@ public class UserController {
   /**
    * 회원 삭제
    */
-  @DeleteMapping("/member/delete/{memberId}")
+  @DeleteMapping("/user/delete/{userId}")
   @ApiOperation(value = "회원 삭제 API", notes = "특정 회원의 가입 정보를 삭제")
-  public ResponseEntity<Object> deleteUser(@PathVariable Long memberId) {
+  public ResponseEntity<Object> deleteUser(@PathVariable Long userId) {
 
-    userService.delete(memberId);
+    userService.delete(userId);
 
     return ResponseEntity.noContent().build();
   }
