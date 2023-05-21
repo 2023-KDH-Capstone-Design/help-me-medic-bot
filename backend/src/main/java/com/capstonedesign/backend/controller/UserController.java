@@ -42,7 +42,7 @@ public class UserController {
   /**
    * 회원 조회
    */
-  @GetMapping("/user/list")
+  @GetMapping("/user")
   @ApiOperation(value = "전체 회원 목록 조회 API", notes = "회원가입된 모든 회원 목록 조회")
   public ListUserResponse<List<ListUserDetailResponseDTO>> listUser() {
 
@@ -56,7 +56,7 @@ public class UserController {
   /**
    * 회원 상세 조회
    */
-  @GetMapping("/user/list/{userId}")
+  @GetMapping("/user/{userId}")
   @ApiOperation(value = "회원 상세 조회 API", notes = "특정 회원 상세 정보 조회")
   public ListUserDetailResponseDTO listUserDetail(@PathVariable Long userId) {
 
@@ -68,7 +68,7 @@ public class UserController {
   /**
    * 회원 수정
    */
-  @PatchMapping("/user/update/{userId}")
+  @PatchMapping("/user/{userId}")
   @ApiOperation(value = "회원 수정 API", notes = "요청받은 회원 정보 수정값에 따라 회원 수정")
   public ResponseEntity<Long> updateUser(@PathVariable Long userId, @RequestBody UpdateUserRequestDTO updateUserRequestDTO) {
 
@@ -81,7 +81,7 @@ public class UserController {
   /**
    * 회원 삭제
    */
-  @DeleteMapping("/user/delete/{userId}")
+  @DeleteMapping("/user/{userId}")
   @ApiOperation(value = "회원 삭제 API", notes = "특정 회원의 가입 정보를 삭제")
   public ResponseEntity<Object> deleteUser(@PathVariable Long userId) {
 
