@@ -44,7 +44,6 @@ public class InitDb {
       log.info("user2.getNickname() -> " + user2.getNickname());
 
       Post post1 = createPost(user1, "게시글1", "아~ 챗봇 답변 좆같이 하네ㅋㅋ");
-//      log.info("post1.getContent() -> " + post1.getContent());
       Post post2 = createPost(user2, "게시글2", "롤할 사람");
       em.persist(post1);
       em.persist(post2);
