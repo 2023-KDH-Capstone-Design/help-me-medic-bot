@@ -5,6 +5,7 @@ import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,7 +28,7 @@ public class User {
   private String country;
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-  private List<Post> posts;
+  private List<Post> posts = new ArrayList<>();
 
   public static User createUser(String loginId, String password, String name, String nickname, String country) {
 
