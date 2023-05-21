@@ -17,6 +17,7 @@ public class CommentService {
 
   private final CommentRepository commentRepository;
 
+  @Transactional
   public Long save(Comment comment) {
 
     commentRepository.save(comment);
@@ -34,6 +35,7 @@ public class CommentService {
     return commentRepository.findAll();
   }
 
+  @Transactional
   public void updateComment(Long id, UpdateCommentRequestDTO request) {
 
     Comment comment = findById(id);
@@ -42,6 +44,7 @@ public class CommentService {
     comment.setUpdatedAt(LocalDateTime.now());
   }
 
+  @Transactional
   public void delete(Long id) {
 
     commentRepository.deleteComment(id);
