@@ -32,7 +32,7 @@ public class PostController {
   @ApiOperation(value = "게시글 작성 API", notes = "제목 및 내용을 요청 파라미터로 하여 게시글 작성")
   public ResponseEntity<Long> registerPost(@RequestBody CreatePostRequestDTO createPostRequestDTO) {
 
-    User findUser = userService.findByName(createPostRequestDTO.getAuthor());
+    User findUser = userService.findByNickname(createPostRequestDTO.getAuthor());
     Post post = Post.createPost(findUser, createPostRequestDTO.getTitle(), createPostRequestDTO.getContent());
     Long postId = postService.save(post);
 
@@ -49,7 +49,7 @@ public class PostController {
 
     List<Post> posts = postService.findAll();
     List<DetailPostResponseDTO> collect = posts.stream().map(p ->
-        new DetailPostResponseDTO(p.getId(), p.getUser().getName(), p.getTitle(), p.getContent(),
+        new DetailPostResponseDTO(p.getId(), p.getUser().getNickname(), p.getTitle(), p.getContent(),
             p.getCreatedAt(), p.getUpdatedAt())).collect(Collectors.toList());
 
     return new ListPostResponse<>(collect.size(), collect);
@@ -65,7 +65,7 @@ public class PostController {
 
     Post findPost = postService.findById(postId);
 
-    return new DetailPostResponseDTO(findPost.getId(), findPost.getUser().getName(), findPost.getTitle(),
+    return new DetailPostResponseDTO(findPost.getId(), findPost.getUser().getNickname(), findPost.getTitle(),
         findPost.getContent(), findPost.getCreatedAt(), findPost.getUpdatedAt());
   }
 
