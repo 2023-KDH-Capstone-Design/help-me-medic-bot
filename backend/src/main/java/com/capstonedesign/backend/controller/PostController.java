@@ -28,7 +28,7 @@ public class PostController {
   /**
    * 게시글 작성
    */
-  @PostMapping("/post/create")
+  @PostMapping("/post")
   @ApiOperation(value = "게시글 작성 API", notes = "제목 및 내용을 요청 파라미터로 하여 게시글 작성")
   public ResponseEntity<Long> registerPost(@RequestBody CreatePostRequestDTO createPostRequestDTO) {
 
@@ -43,7 +43,7 @@ public class PostController {
   /**
    * 게시글 조회
    */
-  @GetMapping("/post/list")
+  @GetMapping("/post")
   @ApiOperation(value = "게시글 목록 조회 API", notes = "전체 게시글 목록 조회")
   public ListPostResponse<List<DetailPostResponseDTO>> listPost() {
 
@@ -59,7 +59,7 @@ public class PostController {
   /**
    * 게시글 상세 조회
    */
-  @GetMapping("/post/list/{postId}")
+  @GetMapping("/post/{postId}")
   @ApiOperation(value = "특정 게시글 상세 조회 API", notes = "특정 게시물 상세 조회")
   public DetailPostResponseDTO listPostDetail(@PathVariable Long postId) {
 
@@ -72,7 +72,7 @@ public class PostController {
   /**
    * 게시글 수정
    */
-  @PatchMapping("/post/update/{postId}")
+  @PatchMapping("/post/{postId}")
   @ApiOperation(value = "게시글 수정 API", notes = "요청받은 게시글 정보 수정값에 따라 작성")
   public ResponseEntity<Long> updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequestDTO updatePostRequestDTO) {
 
@@ -85,7 +85,7 @@ public class PostController {
   /**
    * 게시글 삭제
    */
-  @DeleteMapping("/post/delete/{postId}")
+  @DeleteMapping("/post/{postId}")
   @ApiOperation(value = "게시글 삭제 API", notes = "특정 게시글 삭제")
   public ResponseEntity<Object> deletePost(@PathVariable Long postId) {
 
