@@ -15,11 +15,15 @@ const Home = () => {
   return (
     <div>
       <div className="flex justify-center border-solid border-2 border-black rounded-lg h-56 xl:h-96 mb-5">
-        <img src={Image} alt="chatbot" className="w-full" />
+        <img
+          src={Image}
+          alt="chatbot"
+          className="w-full object-contain object-center h-full"
+        />
       </div>
       <div className="grid md:grid-cols-2 gap-2 flex justify-center">
         <div
-          className="flex inline-flex btn btn-outline rounded-lg lg:h-32 h-24 md:w-auto w-96"
+          className="flex inline-flex btn btn-outline btn-info rounded-lg lg:h-32 h-24 md:w-auto w-96"
           onClick={() => clickHandler("/chat")}
         >
           <div className="flex gap-4">
@@ -28,7 +32,7 @@ const Home = () => {
           </div>
         </div>
         <div
-          className="flex inline-flex btn btn-outline rounded-lg lg:h-32 h-24 md:w-auto w-96"
+          className="flex inline-flex btn btn-outline btn-info rounded-lg lg:h-32 h-24 md:w-auto w-96"
           onClick={() => clickHandler("/forum")}
         >
           <div className="flex gap-4">
