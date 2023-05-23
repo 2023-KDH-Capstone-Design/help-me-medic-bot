@@ -37,16 +37,21 @@ public class InitDb {
 
       User user1 = createUser("admin", "0000", "user1_name", "조병찬", "korea");
       User user2 = createUser("admin2", "1111", "user2_name", "이토 히로부미", "japan");
+      User user3 = createUser("admin3", "2222", "user2_name", "오빠나주겅", "korea");
       em.persist(user1);
       em.persist(user2);
-
-      log.info("user1.getNickname() -> " + user1.getNickname());
-      log.info("user2.getNickname() -> " + user2.getNickname());
+      em.persist(user3);
 
       Post post1 = createPost(user1, "게시글1", "아~ 챗봇 답변 좆같이 하네ㅋㅋ");
       Post post2 = createPost(user2, "게시글2", "롤할 사람");
       em.persist(post1);
       em.persist(post2);
+
+      Comment comment1 = createComment(user2, post1, "그거 원래 그럼");
+      Comment comment2 = createComment(user3, post1, "난 안 그런데?ㅋㅋ");
+      em.persist(comment1);
+      em.persist(comment2);
+
 //      em.flush();
     }
 
@@ -60,10 +65,10 @@ public class InitDb {
       return Post.createPost(user, title, content);
     }
 
-//    private Comment createComment(User user, Post post, String content) {
-//
-//      return Comment.createComment(user, post, content);
-//    }
+    private Comment createComment(User user, Post post, String content) {
+
+      return Comment.createComment(user, post, content);
+    }
 
   }
 }
