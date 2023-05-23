@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,7 +37,9 @@ public class PostController {
     Post post = Post.createPost(findUser, createPostRequestDTO.getTitle(), createPostRequestDTO.getContent());
     Long postId = postService.save(post);
 
-    return ResponseEntity.ok(postId);
+    return ResponseEntity
+        .created(URI.create("/posts/" + postId))
+        .build();
 
   }
 
@@ -79,7 +82,7 @@ public class PostController {
     postService.update(postId, updatePostRequestDTO);
     Post findPost = postService.findById(postId);
 
-    return ResponseEntity.ok(findPost.getId());
+    return ResponseEntity.noContent().build();
   }
 
   /**
