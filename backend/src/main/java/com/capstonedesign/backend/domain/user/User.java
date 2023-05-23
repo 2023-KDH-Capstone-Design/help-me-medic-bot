@@ -1,5 +1,6 @@
 package com.capstonedesign.backend.domain.user;
 
+import com.capstonedesign.backend.domain.comment.Comment;
 import com.capstonedesign.backend.domain.post.Post;
 import javax.persistence.*;
 import lombok.Getter;
@@ -30,6 +31,10 @@ public class User {
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Post> posts = new ArrayList<>();
 
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+  private List<Comment> comments = new ArrayList<>();
+
+  //==생성 메소드==//
   public static User createUser(String loginId, String password, String name, String nickname, String country) {
 
     User user = new User();
