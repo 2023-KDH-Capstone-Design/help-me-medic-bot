@@ -24,7 +24,7 @@ public class UserController {
   /**
    * 회원 가입
    */
-  @PostMapping("/user/join")
+  @PostMapping("/users/join")
   @ApiOperation(value = "회원가입 API", notes = "회원 정보를 요청값으로 받아 회원가입 진행")
   public JoinUserResponseDTO joinUser(@RequestBody JoinUserRequestDTO joinUserRequestDTO) {
 
@@ -42,21 +42,21 @@ public class UserController {
   /**
    * 회원 조회
    */
-  @GetMapping("/user")
+  @GetMapping("/users")
   @ApiOperation(value = "전체 회원 목록 조회 API", notes = "회원가입된 모든 회원 목록 조회")
   public ListUserResponse<List<ListUserDetailResponseDTO>> listUser() {
 
     List<User> userList = userService.findAll();
-    List<ListUserDetailResponseDTO> listMemberData = userList.stream().map(m -> new ListUserDetailResponseDTO(m.getId(), m.getLoginId(), m.getName(), m.getNickname(), m.getCountry()))
+    List<ListUserDetailResponseDTO> listUserData = userList.stream().map(user -> new ListUserDetailResponseDTO(user.getId(), user.getLoginId(), user.getName(), user.getNickname(), user.getCountry()))
         .collect(Collectors.toList());
 
-    return new ListUserResponse<>(listMemberData.size(), listMemberData);
+    return new ListUserResponse<>(listUserData.size(), listUserData);
   }
 
   /**
    * 회원 상세 조회
    */
-  @GetMapping("/user/{userId}")
+  @GetMapping("/users/{userId}")
   @ApiOperation(value = "회원 상세 조회 API", notes = "특정 회원 상세 정보 조회")
   public ListUserDetailResponseDTO listUserDetail(@PathVariable Long userId) {
 
@@ -68,7 +68,7 @@ public class UserController {
   /**
    * 회원 수정
    */
-  @PatchMapping("/user/{userId}")
+  @PatchMapping("/users/{userId}")
   @ApiOperation(value = "회원 수정 API", notes = "요청받은 회원 정보 수정값에 따라 회원 수정")
   public ResponseEntity<Long> updateUser(@PathVariable Long userId, @RequestBody UpdateUserRequestDTO updateUserRequestDTO) {
 
@@ -81,7 +81,7 @@ public class UserController {
   /**
    * 회원 삭제
    */
-  @DeleteMapping("/user/{userId}")
+  @DeleteMapping("/users/{userId}")
   @ApiOperation(value = "회원 삭제 API", notes = "특정 회원의 가입 정보를 삭제")
   public ResponseEntity<Object> deleteUser(@PathVariable Long userId) {
 
