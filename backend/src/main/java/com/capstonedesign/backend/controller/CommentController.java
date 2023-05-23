@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,7 +38,9 @@ public class CommentController {
     Comment comment = Comment.createComment(user, post, request.getContent());
     Long commentId = commentService.save(comment);
 
-    return ResponseEntity.ok(commentId);
+    return ResponseEntity
+        .created(URI.create("/posts/" + postId + "/comments/" + commentId))
+        .build();
   }
 
   @GetMapping("/posts/{postId}/comments")
@@ -67,7 +70,7 @@ public class CommentController {
 
     commentService.updateComment(commentId, request.getContent());
 
-    return ResponseEntity.ok(commentId);
+    return ResponseEntity.noContent().build();
   }
   
   @DeleteMapping("/posts/{postId}/comments/{commentId}")
