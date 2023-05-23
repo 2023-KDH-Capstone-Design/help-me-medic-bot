@@ -20,7 +20,8 @@ import java.util.stream.Collectors;
 @RestController
 @Api(tags = "지도 관련 API")
 public class MapController {
-  @PostMapping("/search/place")
+
+  @PostMapping("/place")
   @ApiOperation(value = "장소 검색 API", notes = "검색어, 장소 유형, 반경과 위도 경도 등을 요청 파라미터로 하여 장소 검색")
   public PlaceSearchResponseByCustom<List<PlaceSearchResponseSortedByRating>> searchPlace(@RequestBody PlaceSearchRequest request) {
 
