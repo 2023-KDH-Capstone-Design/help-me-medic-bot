@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,17 +27,14 @@ public class UserController {
    */
   @PostMapping("/users/join")
   @ApiOperation(value = "회원가입 API", notes = "회원 정보를 요청값으로 받아 회원가입 진행")
-  public JoinUserResponseDTO joinUser(@RequestBody JoinUserRequestDTO joinUserRequestDTO) {
+  public ResponseEntity<Object> joinUser(@RequestBody JoinUserRequestDTO request) {
 
-    User user = new User();
-    user.setLoginId(joinUserRequestDTO.getLoginId());
-    user.setPassword(joinUserRequestDTO.getPassword());
-    user.setName(joinUserRequestDTO.getName());
-    user.setNickname(joinUserRequestDTO.getNickname());
-    user.setCountry(joinUserRequestDTO.getCountry());
-    Long joinId = userService.join(user);
+    User user = User.createUser(request.getLoginId(), request.getPassword(), request.getName(), request.getNickname(), request.getCountry());
+    Long userId = userService.join(user);
 
-    return new JoinUserResponseDTO(joinId);
+    return ResponseEntity
+        .created(URI.create("/users/" + userId))
+        .build();
   }
 
   /**
@@ -75,7 +73,7 @@ public class UserController {
     userService.update(userId, updateUserRequestDTO);
     User findUser = userService.findById(userId);
 
-    return ResponseEntity.ok(findUser.getId());
+    return ResponseEntity.noContent().build();
   }
 
   /**
