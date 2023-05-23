@@ -39,6 +39,18 @@ public class Comment {
   @JoinColumn(name = "post_id")
   private Post post;
 
+  //==연관관계 편의 메소드==//
+  public void setPost(Post post) {
+    this.post = post;
+    post.getComments().add(this);
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+    user.getComments().add(this);
+  }
+
+  //==생성 메소드==//
   public static Comment createComment(User user, Post post, String content) {
 
     Comment comment = new Comment();
