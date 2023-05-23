@@ -36,12 +36,15 @@ public class CommentService {
   }
 
   @Transactional
-  public void updateComment(Long id, UpdateCommentRequestDTO request) {
+  public void updateComment(Long id, String content) {
 
     Comment comment = findById(id);
 
-    comment.setContent(request.getContent());
-    comment.setUpdatedAt(LocalDateTime.now());
+    if (comment!= null) {
+      comment.setContent(content);
+      comment.setUpdatedAt(LocalDateTime.now());
+    }
+
   }
 
   @Transactional
