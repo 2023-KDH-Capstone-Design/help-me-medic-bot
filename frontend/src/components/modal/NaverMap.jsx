@@ -2,15 +2,12 @@ import React, { useEffect } from "react";
 
 const { naver } = window;
 
-const NaverMap = ({ label }) => {
+const NaverMap = ({ label, lat, lng }) => {
   const id = `map-${label.toLowerCase().replace(/\s+/g, "-")}`;
 
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (pos) => {
-        const lat = pos.coords.latitude;
-        const lng = pos.coords.longitude;
-
         const map = new naver.maps.Map(id, {
           center: new naver.maps.LatLng(lat, lng),
           zoom: 15,
