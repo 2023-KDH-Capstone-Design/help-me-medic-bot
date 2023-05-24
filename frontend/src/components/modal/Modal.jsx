@@ -3,9 +3,7 @@ import ReactDOM from "react-dom";
 
 import NaverMap from "./NaverMap";
 
-const ModalOverlay = (props) => {
-  const { label, id } = props;
-
+const ModalOverlay = ({ label, id }) => {
   return (
     <>
       <input type="checkbox" id={id} className="modal-toggle" />
@@ -46,8 +44,7 @@ const ModalOverlay = (props) => {
   );
 };
 
-const Modal = (props) => {
-  const { label } = props;
+const Modal = ({ label }) => {
   const id = `modal-${label.toLowerCase().replace(/\s+/g, "-")}`;
 
   return (

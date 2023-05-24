@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 
 const { naver } = window;
 
-const NaverMap = (props) => {
-  const id = `map-${props.label.toLowerCase().replace(/\s+/g, "-")}`;
+const NaverMap = ({ label }) => {
+  const id = `map-${label.toLowerCase().replace(/\s+/g, "-")}`;
 
   useEffect(() => {
     if (navigator.geolocation) {

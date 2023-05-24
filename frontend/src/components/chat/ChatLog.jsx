@@ -5,16 +5,16 @@ import ResChatBubble from "./ResChatBubble";
 import Modal from "../modal/Modal";
 import "../../styles/ChatLog.css";
 
-const ChatLog = (props) => {
+const ChatLog = ({ log }) => {
   const messageEndRef = useRef(null);
 
   useEffect(() => {
     messageEndRef.current.scrollIntoView({ behavior: "smooth" });
-  }, [props.log]);
+  }, [log]);
 
   return (
     <main className="msger-chat">
-      {props.log.map((chat) => {
+      {log.map((chat) => {
         if (chat.type === "req") {
           return <ReqChatBubble key={chat.id} message={chat.value} />;
         } else {

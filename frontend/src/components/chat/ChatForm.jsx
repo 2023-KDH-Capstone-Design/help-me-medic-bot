@@ -5,7 +5,7 @@ import * as StompJs from "@stomp/stompjs";
 
 import { BsSend } from "react-icons/bs";
 
-const ChatForm = (props) => {
+const ChatForm = ({ onUpdate }) => {
   const { t } = useTranslation();
   const [isConnected, setIsConnected] = useState(false);
   const stompClient = useRef();
@@ -18,14 +18,14 @@ const ChatForm = (props) => {
     stompClient.current.connect({}, () => {
       setIsConnected(true);
       stompClient.current.subscribe("/topic/public", (message) => {
-        props.onUpdate("res", message.body);
+        onUpdate("res", message.body);
       });
     });
   }, []);
 
   const sendMessage = (message) => {
     stompClient.current.send("/app/sendMessage", {}, JSON.stringify(message));
-    props.onUpdate("req", message);
+    onUpdate("req", message);
   };
 
   const handleSubmit = (event) => {
