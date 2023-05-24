@@ -5,27 +5,29 @@ import * as StompJs from "@stomp/stompjs";
 
 import { BsSend } from "react-icons/bs";
 
-const ChatForm = (props) => {
+const ChatForm = ({ onUpdate }) => {
   const { t } = useTranslation();
   const [isConnected, setIsConnected] = useState(false);
   const stompClient = useRef();
   const chatInputRef = useRef();
 
   useEffect(() => {
-    const socket = new SockJS("http://localhost:8080/ws");
+    if (!isConnected) {
+      const socket = new SockJS("http://localhost:8080/ws");
 
-    stompClient.current = StompJs.Stomp.over(socket);
-    stompClient.current.connect({}, () => {
-      setIsConnected(true);
-      stompClient.current.subscribe("/topic/public", (message) => {
-        props.onUpdate("res", message.body);
+      stompClient.current = StompJs.Stomp.over(socket);
+      stompClient.current.connect({}, () => {
+        setIsConnected(true);
+        stompClient.current.subscribe("/topic/public", (message) => {
+          onUpdate("res", message.body);
+        });
       });
-    });
-  }, []);
+    }
+  }, [isConnected, onUpdate]);
 
   const sendMessage = (message) => {
     stompClient.current.send("/app/sendMessage", {}, JSON.stringify(message));
-    props.onUpdate("req", message);
+    onUpdate("req", message);
   };
 
   const handleSubmit = (event) => {

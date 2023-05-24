@@ -12,27 +12,24 @@ const Home = () => {
   const clickHandler = (path) => {
     navigation(path);
   };
+
   return (
     <>
       <img src={Image} alt="chatbot" className="w-full object-contain" />
-      <div className="grid md:grid-cols-2 gap-2 flex justify-center mt-8">
+      <div className="flex flex-col gap-2 w-full justify-center mt-8 md:flex-row">
         <div
-          className="flex inline-flex btn btn-warning rounded-lg lg:h-32 h-24 md:w-auto w-96"
+          className="flex gap-4 btn btn-warning rounded-lg w-full h-24 md:w-1/2"
           onClick={() => clickHandler("/chat")}
         >
-          <div className="flex gap-4">
-            <BsChatDots size="40px" />
-            <span className="text-4xl">{t("chat")}</span>
-          </div>
+          <BsChatDots size="40px" />
+          <span className="text-4xl">{t("chat")}</span>
         </div>
         <div
-          className="flex inline-flex btn btn-success rounded-lg lg:h-32 h-24 md:w-auto w-96"
+          className="flex gap-4 btn btn-success rounded-lg w-full h-24 md:w-1/2"
           onClick={() => clickHandler("/forum")}
         >
-          <div className="flex gap-4">
-            <BsPeople size="40px" />
-            <span className="text-4xl">{t("forum")}</span>
-          </div>
+          <BsPeople size="40px" />
+          <span className="text-4xl">{t("forum")}</span>
         </div>
       </div>
     </>
