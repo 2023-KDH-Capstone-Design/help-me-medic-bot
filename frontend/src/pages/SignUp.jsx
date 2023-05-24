@@ -1,22 +1,58 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const SignUp = () => {
+  const inputId = useRef();
+  const inputPw = useRef();
+  const inputName = useRef();
+  const inputNickname = useRef();
+  const inputCountry = useRef();
+
+  const handleSignUp = () => {
+    if (
+      inputCountry.current.value === "Select Country" ||
+      inputId.current.value === "" ||
+      inputName.current.value === "" ||
+      inputNickname.current.value === "" ||
+      inputPw.current.value === ""
+    ) {
+      alert("모두 입력해주세요.");
+      return;
+    }
+
+    axios
+      .post("http://localhost:8080/users/join", {
+        country: inputCountry.current.value,
+        loginId: inputId.current.value,
+        name: inputName.current.value,
+        nickname: inputNickname.current.value,
+        password: inputPw.current.value,
+      })
+      .then((res) => {
+        alert("회원가입이 완료되었습니다.");
+      })
+      .catch(() => {
+        alert("입력하신 아이디 또는 비밀번호가 일치하지 않습니다.");
+      });
+  };
+
   return (
     <>
       <h1 className="text-primary text-xl font-semibold text-center transition-all duration-200 md:text-3xl">
         <span>Create </span>
         <span className="text-base-content">Account</span>
       </h1>
-      <form className="space-y-4">
+      <form className="space-y-4" onSubmit={handleSignUp}>
         <div>
           <label className="label">
-            <span className="label-text text-base">Email</span>
+            <span className="label-text text-base">ID</span>
           </label>
           <input
-            type="email"
-            placeholder="Enter Email"
+            type="id"
+            placeholder="Enter ID"
             className="w-full input input-bordered"
+            ref={inputId}
           />
         </div>
         <div>
@@ -27,6 +63,7 @@ const SignUp = () => {
             type="password"
             placeholder="Enter Password"
             className="w-full input input-bordered"
+            ref={inputPw}
           />
         </div>
         <div>
@@ -37,6 +74,7 @@ const SignUp = () => {
             type="text"
             placeholder="Name"
             className="w-full input input-bordered"
+            ref={inputName}
           />
         </div>
         <div>
@@ -47,6 +85,7 @@ const SignUp = () => {
             type="text"
             placeholder="Nickname"
             className="w-full input input-bordered"
+            ref={inputNickname}
           />
         </div>
         <div>
@@ -56,6 +95,7 @@ const SignUp = () => {
           <select
             className="select select-bordered w-full"
             defaultValue="Select Country"
+            ref={inputCountry}
           >
             <option disabled>Select Country</option>
             <option>South korea</option>
@@ -82,7 +122,9 @@ const SignUp = () => {
               Login
             </Link>
           </div>
-          <button className="btn btn-block">Sign Up</button>
+          <button type="submit" className="btn btn-block">
+            Sign Up
+          </button>
         </div>
       </form>
     </>
