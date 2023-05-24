@@ -16,21 +16,22 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 @Controller
 public class ChatController {
 
-    private static String secretKey = "S2hFQnJtYVhQUXVZeUZQeGFXUXBUY0pMY1RwcWprV08=";
-    private static String apiUrl = "https://9klnwopt8e.apigw.ntruss.com/custom/v1/10307/f0032dbc440d074bb96f85880cabc76b1b76b1cb1beee6e5ac977104e4c73457";
+    private static final String secretKey = "S2hFQnJtYVhQUXVZeUZQeGFXUXBUY0pMY1RwcWprV08=";
+    private static final String apiUrl = "https://9klnwopt8e.apigw.ntruss.com/custom/v1/10307/f0032dbc440d074bb96f85880cabc76b1b76b1cb1beee6e5ac977104e4c73457";
 
     @GetMapping("chat")
     public String chat() {
@@ -41,9 +42,18 @@ public class ChatController {
     @SendTo("/topic/public")
     public String sendMessage(@Payload String chatMessage) throws IOException {
 
-        String translatedMessage1 = null;
+        // 언어 감지를 통해 얻은 Json 언어 코드 파싱
+        String detectLangsString = detectLangs(chatMessage);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(detectLangsString);
+        String langCode = jsonNode.get("langCode").asText();
+
+        String translatedMessage1 = chatMessage;
         try {
-            translatedMessage1 = extract(translate("en", "ko", chatMessage));
+            if (!Objects.equals(langCode, "ko")) {
+                translatedMessage1 = extract(translate(langCode, "ko", chatMessage));
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -61,7 +71,7 @@ public class ChatController {
         con.setDoOutput(true);
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 
-        wr.write(message.getBytes("UTF-8"));
+        wr.write(message.getBytes(StandardCharsets.UTF_8));
         wr.flush();
         wr.close();
         int responseCode = con.getResponseCode();
@@ -72,7 +82,7 @@ public class ChatController {
 
             BufferedReader in = new BufferedReader(
                 new InputStreamReader(
-                    con.getInputStream(), "UTF-8"));
+                    con.getInputStream(), StandardCharsets.UTF_8));
             String decodedString;
             String jsonString = "";
             while ((decodedString = in.readLine()) != null) {
@@ -100,7 +110,9 @@ public class ChatController {
         }
 
         try {
-            chatMessage = extract(translate("ko", "en", chatMessage));
+            if (!Objects.equals(langCode, "ko")) {
+                chatMessage = extract(translate("ko", langCode, chatMessage));
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -114,13 +126,13 @@ public class ChatController {
         String encodeBase64String = "";
 
         try {
-            byte[] secrete_key_bytes = secretKey.getBytes("UTF-8");
+            byte[] secrete_key_bytes = secretKey.getBytes(StandardCharsets.UTF_8);
 
             SecretKeySpec signingKey = new SecretKeySpec(secrete_key_bytes, "HmacSHA256");
             Mac mac = Mac.getInstance("HmacSHA256");
             mac.init(signingKey);
 
-            byte[] rawHmac = mac.doFinal(message.getBytes("UTF-8"));
+            byte[] rawHmac = mac.doFinal(message.getBytes(StandardCharsets.UTF_8));
             encodeBase64String = Base64.encodeBase64String(rawHmac);
 
             return encodeBase64String;
@@ -176,11 +188,13 @@ public class ChatController {
 
     }
 
-    // 번역
+    /**
+     * 파파고 번역 메소드
+     */
     public String translate(String source, String target, String text) {
 
-        String clientId = "umeasvtipu"; // Client ID 및 Client Secret은 자신의 인증 정보를 발급 후 수정
-        String clientSecret = "3USaPOeHpUIF215ySb8NqAEk1VKzIvWxVZoibNFt";
+        String clientId = "argmirrr8o"; // Client ID 및 Client Secret은 자신의 인증 정보를 발급 후 수정
+        String clientSecret = "Rt2hZzVphe0TG2r9iK4ByuODsxbvBLmqfQJzaFiM";
 
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
@@ -216,4 +230,77 @@ public class ChatController {
         return translatedTextNode.asText();
     }
 
+    /**
+     * 언어 감지 메소드
+     */
+    public String detectLangs(String input) {
+        String clientId = "argmirrr8o"; //애플리케이션 클라이언트 아이디값";
+        String clientSecret = "Rt2hZzVphe0TG2r9iK4ByuODsxbvBLmqfQJzaFiM"; //애플리케이션 클라이언트 시크릿값";
+
+        String query;
+        query = URLEncoder.encode(input, StandardCharsets.UTF_8);
+        String apiURL = "https://naveropenapi.apigw.ntruss.com/langs/v1/dect";
+
+        Map<String, String> requestHeaders = new HashMap<>();
+        requestHeaders.put("X-NCP-APIGW-API-KEY-ID", clientId);
+        requestHeaders.put("X-NCP-APIGW-API-KEY", clientSecret);
+
+        return post(apiURL, requestHeaders, query);
+    }
+
+    private static String post(String apiUrl, Map<String, String> requestHeaders, String text){
+        HttpURLConnection con = connect(apiUrl);
+        String postParams =  "query="  + text; //원본언어: 한국어 (ko) -> 목적언어: 영어 (en)
+        try {
+            con.setRequestMethod("POST");
+            for(Map.Entry<String, String> header :requestHeaders.entrySet()) {
+                con.setRequestProperty(header.getKey(), header.getValue());
+            }
+
+            con.setDoOutput(true);
+            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                wr.write(postParams.getBytes());
+                wr.flush();
+            }
+
+            int responseCode = con.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) { // 정상 응답
+                return readBody(con.getInputStream());
+            } else {  // 에러 응답
+                return readBody(con.getErrorStream());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("API 요청과 응답 실패", e);
+        } finally {
+            con.disconnect();
+        }
+    }
+
+    private static HttpURLConnection connect(String apiUrl){
+        try {
+            URL url = new URL(apiUrl);
+            return (HttpURLConnection)url.openConnection();
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("API URL이 잘못되었습니다. : " + apiUrl, e);
+        } catch (IOException e) {
+            throw new RuntimeException("연결이 실패했습니다. : " + apiUrl, e);
+        }
+    }
+
+    private static String readBody(InputStream body){
+        InputStreamReader streamReader = new InputStreamReader(body);
+
+        try (BufferedReader lineReader = new BufferedReader(streamReader)) {
+            StringBuilder responseBody = new StringBuilder();
+
+            String line;
+            while ((line = lineReader.readLine()) != null) {
+                responseBody.append(line);
+            }
+
+            return responseBody.toString();
+        } catch (IOException e) {
+            throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
+        }
+    }
 }
