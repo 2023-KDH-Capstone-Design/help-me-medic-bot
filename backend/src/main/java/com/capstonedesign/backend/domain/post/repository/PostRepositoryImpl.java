@@ -2,6 +2,8 @@ package com.capstonedesign.backend.domain.post.repository;
 
 import com.capstonedesign.backend.domain.post.Post;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -36,8 +38,13 @@ public class PostRepositoryImpl implements PostRepository {
   @Override
   public List<Post> findAll() {
 
-    return em.createQuery("SELECT p FROM Post p", Post.class)
-        .getResultList();
+    try {
+      return em.createQuery("SELECT p FROM Post p", Post.class)
+          .getResultList();
+    } catch (NoResultException e){
+      return null;
+    }
+
   }
 
 

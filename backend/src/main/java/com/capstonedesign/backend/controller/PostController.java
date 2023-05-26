@@ -14,8 +14,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.NoResultException;
 import java.net.URI;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
@@ -50,13 +52,15 @@ public class PostController {
   @ApiOperation(value = "게시글 목록 조회 API", notes = "전체 게시글 목록 조회")
   public ListPostResponse<List<DetailPostResponseDTO>> listPost() {
 
+    if (Objects.isNull(postService.findAll())) {
+      throw new NoResultException("게시글이 존재하지 않습니다.");
+    }
     List<Post> posts = postService.findAll();
     List<DetailPostResponseDTO> collect = posts.stream().map(p ->
         new DetailPostResponseDTO(p.getId(), p.getUser().getNickname(), p.getContent(),
             p.getCreatedAt(), p.getUpdatedAt())).collect(Collectors.toList());
 
     return new ListPostResponse<>(collect.size(), collect);
-
   }
 
   /**
