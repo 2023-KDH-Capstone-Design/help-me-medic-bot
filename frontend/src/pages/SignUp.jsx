@@ -1,15 +1,19 @@
 import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
   const inputId = useRef();
   const inputPw = useRef();
   const inputName = useRef();
   const inputNickname = useRef();
   const inputCountry = useRef();
 
-  const handleSignUp = () => {
+  const handleSignUp = (event) => {
+    event.preventDefault();
+
     if (
       inputCountry.current.value === "Select Country" ||
       inputId.current.value === "" ||
@@ -31,9 +35,10 @@ const SignUp = () => {
       })
       .then((res) => {
         alert("회원가입이 완료되었습니다.");
+        navigate("/");
       })
       .catch(() => {
-        alert("입력하신 아이디 또는 비밀번호가 일치하지 않습니다.");
+        alert("아이디가 중복되었습니다.");
       });
   };
 

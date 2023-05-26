@@ -6,7 +6,9 @@ const LogIn = () => {
   const inputId = useRef();
   const inputPw = useRef();
 
-  const handleLogIn = () => {
+  const handleLogIn = (event) => {
+    event.preventDefault();
+
     axios
       .post("http://localhost:8080/login", {
         loginId: inputId.current.value,
@@ -15,9 +17,11 @@ const LogIn = () => {
       .then((res) => {
         sessionStorage.setItem("user_id", inputId);
         sessionStorage.setItem("name", res.data.nickname);
+        window.location.reload();
       })
       .catch(() => {
         alert("입력하신 아이디 또는 비밀번호가 일치하지 않습니다.");
+        window.location.reload();
       });
   };
 
