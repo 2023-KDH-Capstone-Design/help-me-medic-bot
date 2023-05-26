@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 const PostForm = () => {
   const { t } = useTranslation();
+  const postInput = useRef();
 
-  const handleSubmit = () => {
-    alert("test");
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    axios
+      .post(`http://localhost:8080/posts`, {
+        userId: sessionStorage.getItem("user_id"),
+        content: postInput.current.value,
+      })
+      .then(() => {
+        window.location.reload();
+      });
   };
 
   return (
@@ -14,6 +25,7 @@ const PostForm = () => {
         <textarea
           className="textarea textarea-lg textarea-bordered"
           placeholder={t("content")}
+          ref={postInput}
         />
         <div className="card-actions justify-end">
           <button type="submit" className="btn btn-primary w-full">
