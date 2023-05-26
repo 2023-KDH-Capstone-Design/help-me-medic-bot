@@ -38,7 +38,7 @@ const SignUp = () => {
         navigate("/");
       })
       .catch(() => {
-        alert("아이디가 중복되었습니다.");
+        alert("이미 존재하는 아이디입니다.");
       });
   };
 
