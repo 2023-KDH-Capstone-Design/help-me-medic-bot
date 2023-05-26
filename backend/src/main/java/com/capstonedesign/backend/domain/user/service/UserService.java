@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.NoResultException;
 import java.util.List;
 
 @Service
@@ -31,7 +32,11 @@ public class UserService {
 
   public User findByLoginId(String loginId) {
 
-    return userRepository.findByLoginId(loginId);
+    try {
+      return userRepository.findByLoginId(loginId);
+    } catch (NoResultException e) {
+      return null;
+    }
   }
 
   public User findByName(String name) {
