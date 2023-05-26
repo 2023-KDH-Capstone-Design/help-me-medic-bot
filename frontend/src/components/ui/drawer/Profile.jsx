@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 import profileImage from "../../../assets/images/kimdamae.jpg";
 
@@ -9,10 +10,12 @@ const Profile = () => {
   const navigate = useNavigate();
 
   const handleLogOut = () => {
-    sessionStorage.removeItem("user_id");
-    sessionStorage.removeItem("name");
-    navigate("/");
-    window.location.reload();
+    axios.post("http://localhost:8080/logout").then(() => {
+      sessionStorage.removeItem("user_id");
+      sessionStorage.removeItem("name");
+      navigate("/");
+      window.location.reload();
+    });
   };
 
   return (
