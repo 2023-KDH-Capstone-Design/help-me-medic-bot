@@ -15,7 +15,7 @@ const LogIn = () => {
         password: inputPw.current.value,
       })
       .then((res) => {
-        sessionStorage.setItem("user_id", inputId);
+        sessionStorage.setItem("user_id", res.data.id);
         sessionStorage.setItem("name", res.data.nickname);
         window.location.reload();
       })
