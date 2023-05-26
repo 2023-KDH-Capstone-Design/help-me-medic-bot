@@ -13,7 +13,6 @@ public class DetailPostResponseDTO {
 
   private Long id;
   private String author;
-  private String title;
   private String content;
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;

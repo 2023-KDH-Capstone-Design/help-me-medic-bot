@@ -34,7 +34,7 @@ public class PostController {
   public ResponseEntity<Long> registerPost(@RequestBody CreatePostRequestDTO createPostRequestDTO) {
 
     User findUser = userService.findByNickname(createPostRequestDTO.getAuthor());
-    Post post = Post.createPost(findUser, createPostRequestDTO.getTitle(), createPostRequestDTO.getContent());
+    Post post = Post.createPost(findUser, createPostRequestDTO.getContent());
     Long postId = postService.save(post);
 
     return ResponseEntity
@@ -52,7 +52,7 @@ public class PostController {
 
     List<Post> posts = postService.findAll();
     List<DetailPostResponseDTO> collect = posts.stream().map(p ->
-        new DetailPostResponseDTO(p.getId(), p.getUser().getNickname(), p.getTitle(), p.getContent(),
+        new DetailPostResponseDTO(p.getId(), p.getUser().getNickname(), p.getContent(),
             p.getCreatedAt(), p.getUpdatedAt())).collect(Collectors.toList());
 
     return new ListPostResponse<>(collect.size(), collect);
@@ -68,7 +68,7 @@ public class PostController {
 
     Post findPost = postService.findById(postId);
 
-    return new DetailPostResponseDTO(findPost.getId(), findPost.getUser().getNickname(), findPost.getTitle(),
+    return new DetailPostResponseDTO(findPost.getId(), findPost.getUser().getNickname(),
         findPost.getContent(), findPost.getCreatedAt(), findPost.getUpdatedAt());
   }
 

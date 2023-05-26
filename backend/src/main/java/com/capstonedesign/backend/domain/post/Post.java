@@ -35,9 +35,6 @@ public class Post {
   private LocalDateTime updatedAt;
 
   @Lob
-  private String title;
-
-  @Lob
   private String content;
 
   @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
@@ -51,11 +48,10 @@ public class Post {
   }
 
   //==생성 메소드==//
-  public static Post createPost(User user, String title , String content) {
+  public static Post createPost(User user, String content) {
     Post post = new Post();
 
     post.setUser(user);
-    post.setTitle(title);
     post.setContent(content);
     post.setCreatedAt(LocalDateTime.now());
     post.setUpdatedAt(LocalDateTime.now());

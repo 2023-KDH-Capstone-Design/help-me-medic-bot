@@ -41,7 +41,6 @@ public class PostService {
     Post findPost = findById(id);
 
     if (findPost!= null) {
-      findPost.setTitle(updatePostRequestDTO.getTitle());
       findPost.setContent(updatePostRequestDTO.getContent());
       findPost.setUpdatedAt(LocalDateTime.now());
     }
