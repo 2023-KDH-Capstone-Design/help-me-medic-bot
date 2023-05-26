@@ -56,6 +56,8 @@ public class LoginController {
       session.invalidate();
     }
 
+    log.info("로그아웃되었습니다.");
+
     return new LogoutResponseDTO(true, "로그아웃");
   }
 
