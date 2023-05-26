@@ -38,8 +38,6 @@ public class LoginController {
   @ApiOperation(value = "로그인 API", notes = "아이디 및 비밀번호를 요청 파라미터로 하여 로그인")
   public LoginResponseDTO login(@RequestBody LoginRequestDTO loginRequestDTO, HttpServletRequest request) {
 
-    duplicateCheck(loginRequestDTO.getLoginId());
-
     User loginUser = loginService.login(loginRequestDTO.getLoginId(), loginRequestDTO.getPassword());
     log.info("login: {}", loginUser);
 
