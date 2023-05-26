@@ -1,42 +1,24 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-// import axios from "axios";
+import axios from "axios";
 
 const LogIn = () => {
-  const [inputId, setInputId] = useState("");
-  const [inputPw, setInputPw] = useState("");
-
-  const handleInputId = (e) => {
-    setInputId(e.target.value);
-  };
-
-  const handleInputPw = (e) => {
-    setInputPw(e.target.value);
-  };
+  const inputId = useRef();
+  const inputPw = useRef();
 
   const handleLogIn = () => {
-    // axios
-    //   .post("http://localhost:8080/api/login", {
-    //     email: inputId,
-    //     passwd: inputPw,
-    //   })
-    //   .then((res) => {
-    //     if (res.data.email === undefined) {
-    //       alert("입력하신 id 가 일치하지 않습니다.");
-    //     } else if (res.data.email === null) {
-    //       alert("입력하신 비밀번호 가 일치하지 않습니다.");
-    //     } else if (res.data.email === inputId) {
-    //       sessionStorage.setItem("user_id", inputId);
-    //       sessionStorage.setItem("name", res.data.name);
-    //     }
-    //     document.location.href = "/";
-    //   })
-    //   .catch();
-
-    // test 코드
-    sessionStorage.setItem("user_id", inputId);
-    sessionStorage.setItem("name", inputId);
-    document.location.href = "/";
+    axios
+      .post("http://localhost:8080/login", {
+        loginId: inputId.current.value,
+        password: inputPw.current.value,
+      })
+      .then((res) => {
+        sessionStorage.setItem("user_id", inputId);
+        sessionStorage.setItem("name", res.data.nickname);
+      })
+      .catch(() => {
+        alert("입력하신 아이디 또는 비밀번호가 일치하지 않습니다.");
+      });
   };
 
   return (
@@ -47,16 +29,16 @@ const LogIn = () => {
           <span className="text-base-content uppercase">Chat</span>
         </div>
       </h1>
-      <form className="space-y-4">
+      <form className="space-y-4" onSubmit={handleLogIn}>
         <div>
           <label className="label">
-            <span className="text-base label-text">Email</span>
+            <span className="text-base label-text">ID</span>
           </label>
           <input
-            type="email"
-            placeholder="Email Address"
+            type="text"
+            placeholder="ID"
             className="w-full input input-bordered"
-            onChange={handleInputId}
+            ref={inputId}
           />
         </div>
         <div>
@@ -67,7 +49,7 @@ const LogIn = () => {
             type="password"
             placeholder="Enter Password"
             className="w-full input input-bordered"
-            onChange={handleInputPw}
+            ref={inputPw}
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -80,7 +62,7 @@ const LogIn = () => {
               Sign up
             </Link>
           </div>
-          <button className="btn btn-block" onClick={handleLogIn}>
+          <button type="submit" className="btn btn-block">
             Login
           </button>
         </div>

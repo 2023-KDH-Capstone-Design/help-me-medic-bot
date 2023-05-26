@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class PlaceSearchResponseSortedByRating {
 
   private String business_state;
