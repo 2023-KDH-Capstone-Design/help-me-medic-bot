@@ -52,11 +52,13 @@ public class LoginController {
   public LogoutResponseDTO logout(HttpServletRequest request) {
 
     HttpSession session = request.getSession(false);
+    User user = (User) session.getAttribute(SessionConstConfig.SESSION_KEY);
+
     if (session != null) {
       session.invalidate();
     }
 
-    log.info("로그아웃되었습니다.");
+    log.info(user.getNickname() + "이(가) 로그아웃되었습니다.");
 
     return new LogoutResponseDTO(true, "로그아웃");
   }
