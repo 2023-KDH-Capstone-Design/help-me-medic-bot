@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreatePostRequestDTO {
 
-  private String author;
+  private Long userId;
   private String content;
 }

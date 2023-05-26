@@ -38,7 +38,7 @@ public class PostController {
   @ApiOperation(value = "게시글 작성 API", notes = "제목 및 내용을 요청 파라미터로 하여 게시글 작성")
   public ResponseEntity<Long> registerPost(@RequestBody CreatePostRequestDTO createPostRequestDTO) {
 
-    User findUser = userService.findByNickname(createPostRequestDTO.getAuthor());
+    User findUser = userService.findById(createPostRequestDTO.getUserId());
     Post post = Post.createPost(findUser, createPostRequestDTO.getContent());
     Long postId = postService.save(post);
 
