@@ -1,6 +1,6 @@
 import React from "react";
 
-import profileImage from "../../assets/images/dog.jpg";
+import profileImage from "../../assets/images/profile.png";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
 

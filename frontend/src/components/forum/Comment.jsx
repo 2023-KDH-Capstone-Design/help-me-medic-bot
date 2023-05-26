@@ -1,6 +1,6 @@
 import React from "react";
 
-import profileImage from "../../assets/images/kimdamae.jpg";
+import profileImage from "../../assets/images/profile.png";
 
 const Comment = ({ author, content }) => {
   return (

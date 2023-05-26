@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import profileImage from "../../assets/images/kimdamae.jpg";
+import profileImage from "../../assets/images/chatbot.png";
 import Modal from "../modal/Modal";
 
 const hospData = [
@@ -31,7 +31,7 @@ const ResChatBubble = ({ message }) => {
     <>
       <div className="chat chat-start ml-2">
         <div className="chat-image avatar">
-          <div className="w-10 rounded-full">
+          <div className="w-10 rounded-full border border-base-content">
             <img src={profileImage} alt="face" />
           </div>
         </div>
