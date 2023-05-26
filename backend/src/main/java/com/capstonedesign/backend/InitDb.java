@@ -42,8 +42,8 @@ public class InitDb {
       em.persist(user2);
       em.persist(user3);
 
-      Post post1 = createPost(user1, "게시글1", "아~ 챗봇 답변 좆같이 하네ㅋㅋ");
-      Post post2 = createPost(user2, "게시글2", "롤할 사람");
+      Post post1 = createPost(user1, "아~ 챗봇 답변 좆같이 하네ㅋㅋ");
+      Post post2 = createPost(user2, "롤할 사람");
       em.persist(post1);
       em.persist(post2);
 
@@ -60,9 +60,9 @@ public class InitDb {
       return User.createUser(loginId, password, name, nickname, country);
     }
 
-    private Post createPost(User user, String title, String content) {
+    private Post createPost(User user, String content) {
 
-      return Post.createPost(user, title, content);
+      return Post.createPost(user, content);
     }
 
     private Comment createComment(User user, Post post, String content) {
