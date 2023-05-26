@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = {"http://localhost:3000"})
 @Api(tags = "게시글 관련 API")
 public class PostController {
 
