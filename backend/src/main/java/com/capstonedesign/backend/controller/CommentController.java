@@ -35,7 +35,7 @@ public class CommentController {
   public ResponseEntity<Long> createComment(@PathVariable Long postId, @RequestBody CreateCommentRequestDTO request) {
 
     Post post = postService.findById(postId);
-    User user = userService.findById(request.getUserId());
+    User user = userService.findByLoginId(request.getLoginId());
     Comment comment = Comment.createComment(user, post, request.getContent());
     Long commentId = commentService.save(comment);
 
