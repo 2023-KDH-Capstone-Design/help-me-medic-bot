@@ -32,7 +32,6 @@ import java.util.Objects;
 public class LoginController {
 
   private final LoginService loginService;
-  private final UserService userService;
 
   @PostMapping("/login")
   @ApiOperation(value = "로그인 API", notes = "아이디 및 비밀번호를 요청 파라미터로 하여 로그인")
@@ -72,14 +71,6 @@ public class LoginController {
           loginUser.getName(), loginUser.getNickname(), loginUser.getCountry());
     } else {
       throw new NoSuchElementException("세션이 존재하지 않습니다.");
-    }
-  }
-
-  public void duplicateCheck(String loginId) {
-
-    if (!Objects.isNull(userService.findByLoginId(loginId))) {
-
-      throw new IllegalArgumentException("이미 존재하는 아이디입니다.");
     }
   }
 }

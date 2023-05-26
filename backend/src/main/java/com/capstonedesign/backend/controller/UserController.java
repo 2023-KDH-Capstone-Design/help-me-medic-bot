@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
@@ -29,6 +30,8 @@ public class UserController {
   @PostMapping("/users/join")
   @ApiOperation(value = "회원가입 API", notes = "회원 정보를 요청값으로 받아 회원가입 진행")
   public ResponseEntity<Object> joinUser(@RequestBody JoinUserRequestDTO request) {
+
+    duplicateCheck(request.getLoginId());
 
     User user = User.createUser(request.getLoginId(), request.getPassword(), request.getName(), request.getNickname(), request.getCountry());
     Long userId = userService.join(user);
@@ -87,5 +90,16 @@ public class UserController {
     userService.delete(userId);
 
     return ResponseEntity.noContent().build();
+  }
+
+  /**
+   * 아이디 중복 조회
+   */
+  public void duplicateCheck(String loginId) {
+
+    if (!Objects.isNull(userService.findByLoginId(loginId))) {
+
+      throw new IllegalArgumentException("이미 존재하는 아이디입니다.");
+    }
   }
 }
