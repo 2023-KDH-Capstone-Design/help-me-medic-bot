@@ -32,11 +32,7 @@ public class UserService {
 
   public User findByLoginId(String loginId) {
 
-    try {
       return userRepository.findByLoginId(loginId);
-    } catch (NoResultException e) {
-      return null;
-    }
   }
 
   public User findByName(String name) {

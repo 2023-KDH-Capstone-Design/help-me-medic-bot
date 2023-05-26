@@ -2,6 +2,8 @@ package com.capstonedesign.backend.domain.user.repository;
 
 import com.capstonedesign.backend.domain.user.User;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -27,9 +29,13 @@ public class UserRepositoryImpl implements UserRepository {
   @Override
   public User findByLoginId(String loginId) {
 
-    return em.createQuery("select u from User u where u.loginId = :loginId", User.class)
-        .setParameter("loginId", loginId)
-        .getSingleResult();
+    try {
+      return em.createQuery("select u from User u where u.loginId = :loginId", User.class)
+              .setParameter("loginId", loginId)
+              .getSingleResult();
+    } catch (NoResultException e) {
+      return null;
+    }
   }
 
   @Override
