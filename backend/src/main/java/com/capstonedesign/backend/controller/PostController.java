@@ -1,6 +1,7 @@
 package com.capstonedesign.backend.controller;
 
 
+import com.capstonedesign.backend.domain.map.dto.response.PlaceSearchResponseByGoogle;
 import com.capstonedesign.backend.domain.user.User;
 import com.capstonedesign.backend.domain.user.service.UserService;
 import com.capstonedesign.backend.domain.post.Post;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.NoResultException;
 import java.net.URI;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -61,7 +63,11 @@ public class PostController {
         new DetailPostResponseDTO(p.getId(), p.getUser().getNickname(), p.getContent(),
             p.getCreatedAt(), p.getUpdatedAt())).collect(Collectors.toList());
 
-    return new ListPostResponse<>(collect.size(), collect);
+    List<DetailPostResponseDTO> sorted = collect.stream()
+        .sorted(Comparator.comparing(DetailPostResponseDTO::getId).reversed())
+        .collect(Collectors.toList());
+
+    return new ListPostResponse<>(sorted.size(), sorted);
   }
 
   /**
