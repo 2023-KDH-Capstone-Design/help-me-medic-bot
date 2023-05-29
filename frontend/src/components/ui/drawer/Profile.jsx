@@ -10,7 +10,7 @@ const Profile = () => {
   const navigate = useNavigate();
 
   const handleLogOut = () => {
-    axios.post("http://localhost:8080/logout").then(() => {
+    axios.post("http://메디챗.웹.한국/logout").then(() => {
       sessionStorage.removeItem("user_id");
       sessionStorage.removeItem("name");
       navigate("/");
