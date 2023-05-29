@@ -103,18 +103,16 @@ const SignUp = () => {
             ref={inputCountry}
           >
             <option disabled>Select Country</option>
-            <option>South korea</option>
-            <option>USA</option>
-            <option>UK</option>
-            <option>spain</option>
-            <option>prance</option>
-            <option>france</option>
+            <option>United Kingdom</option>
+            <option>Spain</option>
+            <option>France</option>
             <option>Indonesia</option>
             <option>Japan</option>
-            <option>China</option>
-            <option>Taiwan</option>
+            <option>Korea</option>
             <option>Portugal</option>
             <option>Russia</option>
+            <option>China</option>
+            <option>Taiwan</option>
           </select>
         </div>
         <div className="flex flex-col gap-2">
