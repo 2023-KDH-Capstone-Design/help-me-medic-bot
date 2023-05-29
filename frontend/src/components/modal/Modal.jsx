@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import NaverMap from "./NaverMap";
+import "../../styles/StarRating.css";
 
 const ModalOverlay = ({ id, hospital }) => {
   return (
@@ -15,15 +16,36 @@ const ModalOverlay = ({ id, hospital }) => {
           >
             ✕
           </label>
-          <h3 className="text-lg font-bold">{hospital.label}</h3>
-          <p
-            className="py-4"
-            dangerouslySetInnerHTML={{ __html: hospital.desc }}
-          ></p>
+          <h3 className="text-lg font-bold">{hospital.name}</h3>
+          <div className="py-4">
+            <p>주소: {hospital.vicinity}</p>
+            <p>
+              평점: {hospital.rating} (리뷰 {hospital.user_ratings_total}개)
+            </p>
+            <div className="star-ratings">
+              <div
+                className="star-ratings-fill space-x-2 text-lg"
+                style={{ width: hospital.rating * 20 + 0.9 + "%" }}
+              >
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+              </div>
+              <div className="star-ratings-base space-x-2 text-lg">
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+              </div>
+            </div>
+          </div>
           <NaverMap
-            label={hospital.label}
-            lat={hospital.lat}
-            lng={hospital.lng}
+            label={hospital.name}
+            lat={hospital.geometry.location.lat}
+            lng={hospital.geometry.location.lng}
           />
           <button className="btn btn-info mt-4">병원 길안내</button>
         </label>
@@ -33,12 +55,12 @@ const ModalOverlay = ({ id, hospital }) => {
 };
 
 const Modal = ({ hospital }) => {
-  const id = `modal-${hospital.label.toLowerCase().replace(/\s+/g, "-")}`;
+  const id = `modal-${hospital.name.toLowerCase().replace(/\s+/g, "-")}`;
 
   return (
     <>
       <label htmlFor={id} className="btn btn-outline btn-primary rounded-xl">
-        {hospital.label}
+        {hospital.name}
       </label>
       {ReactDOM.createPortal(
         <ModalOverlay id={id} hospital={hospital} />,
