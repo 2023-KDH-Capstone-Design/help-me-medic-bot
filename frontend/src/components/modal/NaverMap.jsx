@@ -6,21 +6,15 @@ const NaverMap = ({ label, lat, lng }) => {
   const id = `map-${label.toLowerCase().replace(/\s+/g, "-")}`;
 
   useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(async (pos) => {
-        const map = new naver.maps.Map(id, {
-          center: new naver.maps.LatLng(lat, lng),
-          zoom: 15,
-        });
+    const map = new naver.maps.Map(id, {
+      center: new naver.maps.LatLng(lat, lng),
+      zoom: 15,
+    });
 
-        const marker = new naver.maps.Marker({
-          position: new naver.maps.LatLng(lat, lng),
-          map: map,
-        });
-      });
-    } else {
-      window.alert("현재 위치를 알 수 없습니다.");
-    }
+    const marker = new naver.maps.Marker({
+      position: new naver.maps.LatLng(lat, lng),
+      map: map,
+    });
   }, [id]);
 
   return <div id={id} style={{ width: "100%", height: "350px" }}></div>;
