@@ -35,20 +35,20 @@ public class InitDb {
 
     public void dbInit() {
 
-      User user1 = createUser("admin", "0000", "user1_name", "조병찬", "korea");
-      User user2 = createUser("admin2", "1111", "user2_name", "이토 히로부미", "japan");
-      User user3 = createUser("admin3", "2222", "user2_name", "오빠나주겅", "korea");
+      User user1 = createUser("admin", "admin", "admin", "Admin", "South Korea");
+      User user2 = createUser("test1", "test1", "test1", "中村 あげは", "Japan");
+      User user3 = createUser("test2", "test2", "test2", "조병찬", "South Korea");
       em.persist(user1);
       em.persist(user2);
       em.persist(user3);
 
-      Post post1 = createPost(user1, "아~ 챗봇 답변 좆같이 하네ㅋㅋ");
-      Post post2 = createPost(user2, "롤할 사람");
+      Post post1 = createPost(user3, "頭がとても痛いのですが、どこに行けばいいですか?");
+      Post post2 = createPost(user1, "안녕하세요? 포럼 테스트용 게시물입니다. 포럼에서는 챗봇으로 해결되지 않는 문제를 집단지성으로 해결할 수 있는 공간입니다.");
       em.persist(post1);
       em.persist(post2);
 
-      Comment comment1 = createComment(user2, post1, "그거 원래 그럼");
-      Comment comment2 = createComment(user3, post1, "난 안 그런데?ㅋㅋ");
+      Comment comment1 = createComment(user2, post1, "こんにちは");
+      Comment comment2 = createComment(user3, post1, "반갑습니다.");
       em.persist(comment1);
       em.persist(comment2);
 
