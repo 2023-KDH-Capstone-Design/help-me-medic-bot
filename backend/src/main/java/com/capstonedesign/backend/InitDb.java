@@ -42,8 +42,8 @@ public class InitDb {
       em.persist(user2);
       em.persist(user3);
 
-      Post post1 = createPost(user3, "頭がとても痛いのですが、どこに行けばいいですか?");
-      Post post2 = createPost(user1, "안녕하세요? 포럼 테스트용 게시물입니다. 포럼에서는 챗봇으로 해결되지 않는 문제를 집단지성으로 해결할 수 있는 공간입니다.");
+      Post post1 = createPost(user1, "안녕하세요? 포럼 테스트용 게시물입니다. 포럼에서는 챗봇으로 해결되지 않는 문제를 집단지성으로 해결할 수 있는 공간입니다.");
+      Post post2 = createPost(user2, "頭がとても痛いのですが、どこに行けばいいですか?");
       em.persist(post1);
       em.persist(post2);
 
