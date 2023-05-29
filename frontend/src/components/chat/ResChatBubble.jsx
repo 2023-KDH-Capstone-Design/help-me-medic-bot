@@ -19,7 +19,7 @@ const ResChatBubble = ({ message }) => {
             type: "hospital",
           })
           .then((res) => {
-            setHospList(res.data.results);
+            setHospList(res.data.results.slice(0, 5));
           });
       });
     } else {
