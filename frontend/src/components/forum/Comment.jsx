@@ -1,8 +1,21 @@
 import React from "react";
+import axios from "axios";
 
 import profileImage from "../../assets/images/profile.png";
 
-const Comment = ({ author, content }) => {
+const Comment = ({ postId, commentId, author, content }) => {
+  const handleDelete = (event) => {
+    event.preventDefault();
+
+    axios
+      .delete(
+        `http://메디챗.웹.한국:8080/posts/${postId}/comments/${commentId}`
+      )
+      .then(() => {
+        window.location.reload();
+      });
+  };
+
   return (
     <div className="flex items-center space-x-3">
       <div className="avatar">
@@ -11,7 +24,14 @@ const Comment = ({ author, content }) => {
         </div>
       </div>
       <div className="flex flex-col">
-        <span className="inline-flex text-xs">{author}</span>
+        <div className="flex items-center gap-2">
+          <span className="inline-flex text-xs">{author}</span>
+          {author === sessionStorage.getItem("name") && (
+            <label className="text-xs" onClick={handleDelete}>
+              ✕
+            </label>
+          )}
+        </div>
         <span className="">{content}</span>
       </div>
     </div>

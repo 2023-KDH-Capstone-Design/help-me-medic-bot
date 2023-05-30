@@ -1,10 +1,19 @@
 import React from "react";
+import axios from "axios";
 
 import profileImage from "../../assets/images/profile.png";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
 
 const Post = ({ id, author, content }) => {
+  const handleDelete = (event) => {
+    event.preventDefault();
+
+    axios.delete(`http://메디챗.웹.한국:8080/posts/${id}`).then(() => {
+      window.location.reload();
+    });
+  };
+
   return (
     <div className="card w-full bg-base-100 shadow-xl">
       <div className="card-body">
@@ -15,6 +24,14 @@ const Post = ({ id, author, content }) => {
             </div>
           </div>
           <p>{author}</p>
+          {author === sessionStorage.getItem("name") && (
+            <label
+              className="btn btn-outline btn-xs m-1"
+              onClick={handleDelete}
+            >
+              Delete
+            </label>
+          )}
         </div>
         <p className="my-2 text-lg">{content}</p>
         <CommentForm id={id} />

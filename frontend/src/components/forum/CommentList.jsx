@@ -17,6 +17,8 @@ const PostList = ({ id }) => {
       {commentList.map((comment) => (
         <Comment
           key={comment.id}
+          postId={id}
+          commentId={comment.id}
           author={comment.author}
           content={comment.content}
         />
