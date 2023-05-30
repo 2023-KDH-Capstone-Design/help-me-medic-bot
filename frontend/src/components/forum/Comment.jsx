@@ -26,7 +26,8 @@ const Comment = ({ postId, commentId, author, content }) => {
       <div className="flex flex-col">
         <div className="flex items-center gap-2">
           <span className="inline-flex text-xs">{author}</span>
-          {author === sessionStorage.getItem("name") && (
+          {(author === sessionStorage.getItem("name") ||
+            "Admin" === sessionStorage.getItem("name")) && (
             <label className="text-xs" onClick={handleDelete}>
               ✕
             </label>
