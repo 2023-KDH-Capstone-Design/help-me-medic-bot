@@ -24,7 +24,8 @@ const Post = ({ id, author, content }) => {
             </div>
           </div>
           <p>{author}</p>
-          {author === sessionStorage.getItem("name") && (
+          {(author === sessionStorage.getItem("name") ||
+            "Admin" === sessionStorage.getItem("name")) && (
             <label
               className="btn btn-outline btn-xs m-1"
               onClick={handleDelete}
