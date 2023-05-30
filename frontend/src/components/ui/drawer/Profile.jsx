@@ -10,12 +10,10 @@ const Profile = () => {
   const navigate = useNavigate();
 
   const handleLogOut = () => {
-    axios.post("http://메디챗.웹.한국:8080/logout").then(() => {
-      sessionStorage.removeItem("user_id");
-      sessionStorage.removeItem("name");
-      navigate("/");
-      window.location.reload();
-    });
+    sessionStorage.removeItem("user_id");
+    sessionStorage.removeItem("name");
+    navigate("/");
+    window.location.reload();
   };
 
   return (
@@ -24,11 +22,9 @@ const Profile = () => {
         <img src={profileImage} alt="face" className="w-8 h-8 rounded" />
         <span className="inline-flex">{sessionStorage.getItem("name")}</span>
       </div>
-      <div className="dropdown dropdown-top dropdown-end">
-        <label className="btn btn-outline btn-xs m-1" onClick={handleLogOut}>
-          {t("logout")}
-        </label>
-      </div>
+      <label className="btn btn-outline btn-xs m-1" onClick={handleLogOut}>
+        {t("logout")}
+      </label>
     </div>
   );
 };
