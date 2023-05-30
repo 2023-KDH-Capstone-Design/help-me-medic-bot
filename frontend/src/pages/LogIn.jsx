@@ -10,7 +10,7 @@ const LogIn = () => {
     event.preventDefault();
 
     axios
-      .post("http://메디챗.웹.한국/login", {
+      .post("http://메디챗.웹.한국:8080/login", {
         loginId: inputId.current.value,
         password: inputPw.current.value,
       })

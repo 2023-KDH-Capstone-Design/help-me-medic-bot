@@ -13,7 +13,7 @@ const ChatForm = ({ onUpdate }) => {
 
   useEffect(() => {
     if (!isConnected) {
-      const socket = new SockJS("http://메디챗.웹.한국/ws");
+      const socket = new SockJS("http://메디챗.웹.한국:8080/ws");
 
       stompClient.current = StompJs.Stomp.over(socket);
       stompClient.current.connect({}, () => {

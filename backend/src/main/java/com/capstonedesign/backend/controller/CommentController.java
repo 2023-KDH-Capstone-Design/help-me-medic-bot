@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = {"http://xn--2z1bo3hjrs.xn--yq5b.xn--3e0b707e/"})
 @Api(tags = "댓글 관련 API")
 public class CommentController {
 
