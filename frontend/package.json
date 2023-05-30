@@ -20,7 +20,7 @@
     "theme-change": "^2.5.0",
     "web-vitals": "^2.1.0"
   },
-  "homepage": "http://xn--2z1bo3hjrs.xn--yq5b.xn--3e0b707e",
+  "homepage": "http://메디챗.웹.한국",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
