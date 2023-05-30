@@ -35,7 +35,7 @@ public class InitDb {
 
     public void dbInit() {
 
-      User user1 = createUser("admin", "admin", "admin", "Admin", "South Korea");
+      /*User user1 = createUser("admin", "admin", "admin", "Admin", "South Korea");
       User user2 = createUser("test1", "test1", "test1", "中村 あげは", "Japan");
       User user3 = createUser("test2", "test2", "test2", "조병찬", "South Korea");
       em.persist(user1);
@@ -50,7 +50,7 @@ public class InitDb {
       Comment comment1 = createComment(user2, post1, "こんにちは");
       Comment comment2 = createComment(user3, post1, "반갑습니다.");
       em.persist(comment1);
-      em.persist(comment2);
+      em.persist(comment2);*/
 
 //      em.flush();
     }
