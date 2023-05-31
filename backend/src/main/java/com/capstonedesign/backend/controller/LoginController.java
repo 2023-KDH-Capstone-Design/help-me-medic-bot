@@ -26,7 +26,7 @@ import java.util.Objects;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = {"http://xn--2z1bo3hjrs.xn--yq5b.xn--3e0b707e/"})
+@CrossOrigin(origins = {"https://xn--2z1bo3hjrs.xn--yq5b.xn--3e0b707e/"})
 @Slf4j
 @Api(tags = "로그인 관련 API")
 public class LoginController {

@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = {"http://xn--2z1bo3hjrs.xn--yq5b.xn--3e0b707e/"})
+@CrossOrigin(origins = {"https://xn--2z1bo3hjrs.xn--yq5b.xn--3e0b707e/"})
 @Api(tags = "회원 관련 API")
 public class UserController {
 
