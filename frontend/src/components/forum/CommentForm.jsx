@@ -11,14 +11,18 @@ const CommentForm = ({ id }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    axios
-      .post(`https://메디챗.웹.한국:8443/posts/${id}/comments`, {
-        userId: sessionStorage.getItem("user_id"),
-        content: commentInput.current.value,
-      })
-      .then(() => {
-        window.location.reload();
-      });
+    if (commentInput.current.value.trim() !== "") {
+      axios
+        .post(`https://메디챗.웹.한국:8443/posts/${id}/comments`, {
+          userId: sessionStorage.getItem("user_id"),
+          content: commentInput.current.value,
+        })
+        .then(() => {
+          window.location.reload();
+        });
+    } else {
+      alert("내용을 입력해주세요.");
+    }
   };
 
   return (
