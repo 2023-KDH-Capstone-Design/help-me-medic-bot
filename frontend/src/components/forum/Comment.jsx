@@ -9,7 +9,7 @@ const Comment = ({ postId, commentId, author, content }) => {
 
     axios
       .delete(
-        `http://메디챗.웹.한국:8080/posts/${postId}/comments/${commentId}`
+        `https://메디챗.웹.한국:8443/posts/${postId}/comments/${commentId}`
       )
       .then(() => {
         window.location.reload();

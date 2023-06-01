@@ -7,9 +7,11 @@ const PostList = ({ id }) => {
   let [commentList, setCommentList] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://메디챗.웹.한국:8080/posts/${id}/comments`).then((res) => {
-      setCommentList(res.data.data);
-    });
+    axios
+      .get(`https://메디챗.웹.한국:8443/posts/${id}/comments`)
+      .then((res) => {
+        setCommentList(res.data.data);
+      });
   }, [id]);
 
   return (

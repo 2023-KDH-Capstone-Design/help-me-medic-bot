@@ -12,7 +12,7 @@ const CommentForm = ({ id }) => {
     event.preventDefault();
 
     axios
-      .post(`http://메디챗.웹.한국:8080/posts/${id}/comments`, {
+      .post(`https://메디챗.웹.한국:8443/posts/${id}/comments`, {
         userId: sessionStorage.getItem("user_id"),
         content: commentInput.current.value,
       })

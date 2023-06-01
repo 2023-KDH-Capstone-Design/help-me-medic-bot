@@ -10,7 +10,7 @@ const PostForm = () => {
     event.preventDefault();
 
     axios
-      .post(`http://메디챗.웹.한국:8080/posts`, {
+      .post(`https://메디챗.웹.한국:8443/posts`, {
         userId: sessionStorage.getItem("user_id"),
         content: postInput.current.value,
       })

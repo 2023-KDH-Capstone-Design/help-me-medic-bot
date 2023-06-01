@@ -7,7 +7,7 @@ const PostList = () => {
   let [postList, setPostList] = useState([]);
 
   useEffect(() => {
-    axios.get("http://메디챗.웹.한국:8080/posts").then((res) => {
+    axios.get("https://메디챗.웹.한국:8443/posts").then((res) => {
       setPostList(res.data.postList);
     });
   }, []);
