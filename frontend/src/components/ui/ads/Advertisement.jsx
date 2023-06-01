@@ -9,7 +9,7 @@ const Advertisement = () => {
     reference.current.innerHTML = "";
     const script = document.createElement("script");
     script.id = "_carbonads_js";
-    script.src = `//cdn.carbonads.com/carbon.js?serve=CVAIKKQM&placement=carbonadsnet`;
+    script.src = `//cdn.carbonads.com/carbon.js?serve=CKYIKKJL&placement=getbootstrapcom`;
     reference.current.appendChild(script);
   }, []);
 
