@@ -5,6 +5,17 @@ import NaverMap from "./NaverMap";
 import "../../styles/StarRating.css";
 
 const ModalOverlay = ({ id, hospital }) => {
+  const handleNavigate = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async (pos) => {
+        const link = `http://map.naver.com/index.nhn?slng=${pos.coords.longitude}&slat=${pos.coords.latitude}&stext=Current%20Location&elng=${hospital.geometry.location.lng}&elat=${hospital.geometry.location.lat}&etext=${hospital.name}&menu=route&pathType=1`;
+        window.open(link, "_blank");
+      });
+    } else {
+      window.alert("현재 위치를 알 수 없습니다.");
+    }
+  };
+
   return (
     <>
       <input type="checkbox" id={id} className="modal-toggle" />
@@ -47,7 +58,9 @@ const ModalOverlay = ({ id, hospital }) => {
             lat={hospital.geometry.location.lat}
             lng={hospital.geometry.location.lng}
           />
-          <button className="btn btn-info mt-4">병원 길안내</button>
+          <button className="btn btn-info mt-4" onClick={handleNavigate}>
+            병원 길안내
+          </button>
         </label>
       </label>
     </>
