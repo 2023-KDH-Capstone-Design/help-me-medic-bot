@@ -15,7 +15,7 @@ const NaverMap = ({ label, lat, lng }) => {
       position: new naver.maps.LatLng(lat, lng),
       map: map,
     });
-  }, [id]);
+  }, [id, lat, lng]);
 
   return <div id={id} style={{ width: "100%", height: "350px" }}></div>;
 };
